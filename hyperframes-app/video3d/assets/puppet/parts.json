@@ -1,0 +1,152 @@
+{
+ "kai": {
+  "size": [
+   568,
+   1428
+  ],
+  "height": 4.6,
+  "fadeBottom": 0.1,
+  "parts": {
+   "head": {
+    "file": "./assets/puppet/kai_head.png",
+    "bbox": [
+     104,
+     0,
+     568,
+     576
+    ],
+    "pivot": [
+     285,
+     560
+    ]
+   },
+   "armL": {
+    "file": "./assets/puppet/kai_armL.png",
+    "bbox": [
+     3,
+     801,
+     171,
+     1377
+    ],
+    "pivot": [
+     140,
+     790
+    ]
+   },
+   "armR": {
+    "file": "./assets/puppet/kai_armR.png",
+    "bbox": [
+     420,
+     760,
+     567,
+     1361
+    ],
+    "pivot": [
+     430,
+     775
+    ]
+   },
+   "torso": {
+    "file": "./assets/puppet/kai_torso.png",
+    "bbox": [
+     0,
+     431,
+     568,
+     1428
+    ],
+    "pivot": [
+     284.0,
+     714.0
+    ]
+   }
+  }
+ },
+ "moc": {
+  "size": [
+   609,
+   1298
+  ],
+  "height": 4.3,
+  "fadeBottom": 0,
+  "parts": {
+   "head": {
+    "file": "./assets/puppet/moc_head.png",
+    "bbox": [
+     0,
+     0,
+     609,
+     501
+    ],
+    "pivot": [
+     245,
+     495
+    ]
+   },
+   "armL": {
+    "file": "./assets/puppet/moc_armL.png",
+    "bbox": [
+     60,
+     560,
+     171,
+     881
+    ],
+    "pivot": [
+     150,
+     575
+    ]
+   },
+   "armR": {
+    "file": "./assets/puppet/moc_armR.png",
+    "bbox": [
+     300,
+     561,
+     406,
+     861
+    ],
+    "pivot": [
+     320,
+     580
+    ]
+   },
+   "legL": {
+    "file": "./assets/puppet/moc_legL.png",
+    "bbox": [
+     27,
+     1045,
+     249,
+     1296
+    ],
+    "pivot": [
+     170,
+     1045
+    ]
+   },
+   "legR": {
+    "file": "./assets/puppet/moc_legR.png",
+    "bbox": [
+     248,
+     1045,
+     446,
+     1298
+    ],
+    "pivot": [
+     345,
+     1045
+    ]
+   },
+   "torso": {
+    "file": "./assets/puppet/moc_torso.png",
+    "bbox": [
+     51,
+     490,
+     466,
+     1045
+    ],
+    "pivot": [
+     304.5,
+     649.0
+    ]
+   }
+  }
+ }
+}

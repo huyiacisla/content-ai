@@ -13,8 +13,11 @@ const lines = brief.scenes.flatMap((s) => s.lines);
 const interactions = (brief.interactions || []).map((i) => ({
   type: i.type, startSec: i.startSec, endSec: i.endSec, approach: i.motion.approach.durationSec,
 }));
-const useSprites = process.argv.includes('--sprites'); // mặc định: model 3D có xương (tay/chân IK); --sprites = ảnh 2D cutout
+const useSprites = process.argv.includes('--sprites'); // --sprites = ảnh 2D phẳng
+const usePuppet = !useSprites && !process.argv.includes('--model'); // mặc định: puppet (ảnh 2D cắt khúc); --model = model 3D tự dựng
+const puppet = usePuppet ? JSON.parse(readFileSync(new URL('./assets/puppet/parts.json', import.meta.url))) : null;
 const stage = {
+  puppet,
   sprites: useSprites ? {
     kai: {src: './assets/kai-cut.png', height: 4.6, fadeBottom: 0.1, shadow: false},
     moc: {src: './assets/moc-cut.png', height: 4.3, shadow: true},

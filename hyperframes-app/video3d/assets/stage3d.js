@@ -233,6 +233,61 @@ if (SP) {
   }
 }
 
+// chế độ puppet: Kai/Mốc cắt từ ảnh 2D thành khúc (S.puppet = parts.json), lắp khớp trong 3D
+const PP = S.puppet;
+const puppets = {};
+if (PP) {
+  const loadImg = (src) => new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; });
+  const Z = {torso: 0, legL: -0.01, legR: -0.01, head: 0.02, armL: 0.03, armR: 0.03};
+  for (const who of ['kai', 'moc']) {
+    const d = PP[who];
+    const [W, H] = d.size;
+    const k = d.height / H; // px → đơn vị 3D
+    const root = new THREE.Group();
+    const lean = new THREE.Group();
+    root.add(lean);
+    const parts = {};
+    for (const [name, pt] of Object.entries(d.parts)) {
+      const im = await loadImg(pt.file);
+      let src = im;
+      if (name === 'torso' && d.fadeBottom) { // đáy cắt ngang đùi ⇒ mờ dần
+        const cv = document.createElement('canvas');
+        cv.width = im.width; cv.height = im.height;
+        const g = cv.getContext('2d');
+        g.drawImage(im, 0, 0);
+        const h = H * d.fadeBottom;
+        const gr = g.createLinearGradient(0, im.height - h, 0, im.height);
+        gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,1)');
+        g.globalCompositeOperation = 'destination-out';
+        g.fillStyle = gr; g.fillRect(0, im.height - h, im.width, h);
+        src = cv;
+      }
+      const tex = new THREE.CanvasTexture(src);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 4;
+      const [x0, y0, x1, y1] = pt.bbox;
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry((x1 - x0) * k, (y1 - y0) * k), new THREE.MeshBasicMaterial({map: tex, transparent: true, alphaTest: 0.02}));
+      // pivot (px) → đơn vị; mesh đặt lệch so với pivot
+      const pv = {x: (pt.pivot[0] - W / 2) * k, y: (H - pt.pivot[1]) * k};
+      const cx = ((x0 + x1) / 2 - W / 2) * k, cy = (H - (y0 + y1) / 2) * k;
+      mesh.position.set(cx - pv.x, cy - pv.y, 0);
+      const grp = new THREE.Group();
+      grp.position.set(pv.x, pv.y, Z[name] ?? 0);
+      grp.add(mesh);
+      lean.add(grp);
+      parts[name] = grp;
+    }
+    if (who === 'moc') {
+      const sh = new THREE.Mesh(new THREE.CircleGeometry(0.9, 32), new THREE.MeshBasicMaterial({color: 0x1b2a41, transparent: true, opacity: 0.12}));
+      sh.rotation.x = -Math.PI / 2; sh.position.y = 0.01; sh.scale.set(1.2, 0.5, 1);
+      root.add(sh);
+    }
+    scene.add(root);
+    puppets[who] = {root, lean, parts};
+    if (chars[who]) chars[who].root.visible = false;
+  }
+}
+
 // môi trường đi bộ: đường + vạch + skyline
 const env = new THREE.Group();
 const walkAngle = cfg.poses.walk.kai.rotY;
@@ -323,10 +378,10 @@ const GESTURES = {
 };
 // gán cử chỉ theo từng câu thoại: 'kênh@giây'. both = cả hai tay
 const GEST = {
-  'kai@1': {g: 'wave'}, 'moc@3': {g: 'scratch'}, 'kai@4.5': {g: 'point'},
+  'kai@1': {g: 'wave'}, 'moc@3': {g: 'open'}, 'kai@4.5': {g: 'point'},
   'moc@6': {g: 'open', both: true}, 'kai@8': {g: 'chop'}, 'moc@10': {g: 'open', both: true},
   'kai@12': {g: 'point'}, 'kai@14': {g: 'point'}, 'moc@16': {g: 'chop'},
-  'kai@18': {g: 'count'}, 'moc@20': {g: 'fist'}, 'kai@24': {g: 'fist'}, 'moc@26': {g: 'open', both: true},
+  'kai@18': {g: 'count'}, 'moc@20': {g: 'open'}, 'kai@24': {g: 'fist'}, 'moc@26': {g: 'open', both: true},
 };
 const gestOf = (l) => GEST[`${l.char}@${l.startSec}`];
 // 0→1→0 mượt trong câu thoại (vào 0.25s, ra 0.25s)
@@ -429,6 +484,80 @@ function updateSprite(who, t) {
   root.scale.set(1 + pop * 0.5 + squeeze, 1 + pop + breath - squeeze * 0.5, 1);
 }
 
+// góc tay "ra ngoài" (rad; 0 = buông, π = giơ thẳng lên) theo cử chỉ
+const GANGLE = {
+  wave: (u) => 2.7 + Math.sin(u * 14) * 0.3,
+  point: (u) => 1.45 + Math.sin(u * 6) * 0.05,
+  open: (u) => 0.95 + Math.sin(u * 5) * 0.12,
+  count: (u) => 2.9 + Math.sin(u * 7) * 0.12,
+  chop: (u) => 1.4 + Math.sin(u * 8) * 0.4,
+  scratch: (u) => 2.9 + Math.sin(u * 16) * 0.06,
+  fist: (u) => 2.2 + Math.sin(u * 9) * 0.05,
+};
+function updatePuppet(who, t) {
+  const {root, lean, parts} = puppets[who];
+  const {st, handsA, handsB, p, it} = poseAt(t, who);
+  const isWalk = it && it.type === 'walk';
+  const walkT = isWalk ? t - it.startSec : 0;
+  const walkAmt = isWalk ? clamp(p, 0, 1) : 0;
+  const phase = (walkT / M.walk.cycleSec) * Math.PI * 2;
+  const line = lines.find((l) => l.char === who && t >= l.startSec && t < l.endSec);
+  const talking = !!line;
+  const u = line ? t - line.startSec : 99;
+  const pop = line ? Math.exp(-M.talk.popSpring.k * u) * Math.cos(M.talk.popSpring.hz * u) * M.talk.popSpring.amp : 0;
+  const bob = isWalk ? Math.abs(Math.sin(phase)) * M.walk.bobUnits * walkAmt : 0;
+  const breath = Math.sin(t * 2 + (who === 'kai' ? 0 : 1.3)) * M.idle.breathAmp;
+  const dir = who === 'kai' ? 1 : -1; // hướng nhìn về bạn
+
+  root.position.set(st.x, bob, st.z + (who === 'kai' ? 0.05 : 0));
+  root.rotation.y = st.rotY * 0.45;
+  lean.rotation.z = -st.tilt * 0.6 + (isWalk ? Math.sin(phase) * 0.04 * walkAmt : 0);
+  let squeeze = 0;
+  if (it && it.type === 'hug' && t >= M.hug.squeezeFromSec) squeeze = Math.exp(-((t - M.hug.squeezeFromSec) % 0.5) * 10) * M.hug.squeezeAmp;
+  if (it && it.type === 'hold-hands' && t >= M['hold-hands'].squeezeAtSec) squeeze = Math.exp(-(t - M['hold-hands'].squeezeAtSec) * 10) * 0.04;
+  root.scale.set(1 + pop * 0.5 + squeeze, 1 + pop + breath - squeeze * 0.5, 1);
+
+  // đầu: gật khi nói; nghiêng + gật khi nghe
+  const other = who === 'kai' ? 'moc' : 'kai';
+  const oLine = lines.find((l) => l.char === other && t >= l.startSec - 0.1 && t < l.endSec + 0.1);
+  const listen = oLine && !isWalk ? clamp((t - oLine.startSec + 0.1) / 0.3, 0, 1) * clamp((oLine.endSec + 0.1 - t) / 0.3, 0, 1) : 0;
+  parts.head.rotation.z = -st.tilt * 0.5 + (talking ? Math.sin(t * 9) * 0.035 : 0) + listen * (-dir * 0.07 + Math.sin(t * 3.2) * 0.03);
+  parts.head.position.y += 0; // giữ pivot
+
+  // tay: a>0 = ra ngoài (trái −, phải +)
+  const outer = who === 'kai' ? 'armL' : 'armR';
+  const inner = who === 'kai' ? 'armR' : 'armL';
+  const ang = {armL: Math.sin(t * 1.7) * 0.03, armR: -Math.sin(t * 1.7 + 1) * 0.03};
+  if (isWalk) {
+    ang.armL += Math.sin(phase) * 0.4 * walkAmt;
+    ang.armR += -Math.sin(phase) * 0.4 * walkAmt;
+  }
+  const gd = line && !isWalk ? gestOf(line) : null;
+  if (gd) {
+    const gw = lineEnv(line, t);
+    const a = GANGLE[gd.g](t - line.startSec);
+    ang[outer] = lerp(ang[outer], a, gw);
+    if (gd.both) ang[inner] = lerp(ang[inner], a, gw);
+  }
+  // ôm / nắm tay: tay phía bạn đưa ra trước
+  const hasH = (o) => Object.keys(o || {}).length > 0;
+  const reach = lerp(hasH(handsA) ? 1 : 0, hasH(handsB) ? 1 : 0, p);
+  if (it && (it.type === 'hug' || it.type === 'hold-hands') && !isWalk) {
+    const a = it.type === 'hug' ? 1.35 : 0.55;
+    ang[inner] = lerp(ang[inner], a, clamp(reach, 0, 1));
+    ang[inner] += it.type === 'hug' && squeeze ? squeeze * 3 : 0;
+  }
+  if (parts.armL) parts.armL.rotation.z = -ang.armL;
+  if (parts.armR) parts.armR.rotation.z = ang.armR;
+  // chân (Mốc): nhấc + vung khi đi
+  if (parts.legL) {
+    parts.legL.rotation.z = isWalk ? Math.sin(phase) * 0.28 * walkAmt : 0;
+    parts.legR.rotation.z = isWalk ? Math.sin(phase + Math.PI) * 0.28 * walkAmt : 0;
+    parts.legL.position.y = (parts.legL.userData.y0 ??= parts.legL.position.y) + (isWalk ? Math.max(0, Math.sin(phase)) * 0.12 * walkAmt : 0);
+    parts.legR.position.y = (parts.legR.userData.y0 ??= parts.legR.position.y) + (isWalk ? Math.max(0, Math.sin(phase + Math.PI)) * 0.12 * walkAmt : 0);
+  }
+}
+
 function updateEnv(t) {
   const f = cfg.environment;
   const on = t >= f.road.fromSec;
@@ -452,7 +581,7 @@ function updateCamera(t) {
 }
 
 function draw(t) {
-  if (SP) { updateSprite('kai', t); updateSprite('moc', t); } else { updateChar('kai', t); updateChar('moc', t); }
+  if (PP) { updatePuppet('kai', t); updatePuppet('moc', t); } else if (SP) { updateSprite('kai', t); updateSprite('moc', t); } else { updateChar('kai', t); updateChar('moc', t); }
   updateEnv(t);
   updateCamera(t);
   renderer.render(scene, camera);
