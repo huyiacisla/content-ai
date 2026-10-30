@@ -856,5 +856,144 @@
         }
       }
     }
+  },
+  "stage2d": {
+    "engine": "hyperframes+gsap",
+    "style": "cutout-puppet",
+    "assets": {
+      "kai": "assets/kai-cut.png",
+      "moc": "assets/moc-cut.png",
+      "note": "tách nền bằng rembg (isnet-general-use); ảnh Kai chỉ có tới đùi ⇒ nhân vật đứng sau mép nền/đường (bán thân)"
+    },
+    "chars": {
+      "kai": {
+        "heightPx": 1050,
+        "bottomY": 1720,
+        "z": 4
+      },
+      "moc": {
+        "heightPx": 1040,
+        "bottomY": 1720,
+        "z": 3
+      }
+    },
+    "groundY": 1700,
+    "ground": {
+      "color": "#D6EEFB",
+      "walkRoad": {
+        "color": "ink",
+        "dashColor": "bg",
+        "scrollPxPerSec": 480
+      },
+      "skyline": {
+        "colors": [
+          "#D6EEFB",
+          "#BFE3F7"
+        ],
+        "scrollPxPerSec": 120
+      }
+    },
+    "poses": {
+      "stand": {
+        "kai": {
+          "cx": 290,
+          "rot": 0,
+          "scale": 0.96
+        },
+        "moc": {
+          "cx": 790,
+          "rot": 0,
+          "scale": 0.96
+        }
+      },
+      "hold-hands": {
+        "kai": {
+          "cx": 380,
+          "rot": 2,
+          "scale": 0.98
+        },
+        "moc": {
+          "cx": 740,
+          "rot": -2,
+          "scale": 0.98
+        }
+      },
+      "hug": {
+        "kai": {
+          "cx": 400,
+          "rot": 4,
+          "scale": 1.0
+        },
+        "moc": {
+          "cx": 700,
+          "rot": -4,
+          "scale": 1.0
+        }
+      },
+      "walk": {
+        "kai": {
+          "cx": 330,
+          "rot": 0,
+          "scale": 0.98
+        },
+        "moc": {
+          "cx": 760,
+          "rot": 0,
+          "scale": 0.98
+        }
+      }
+    },
+    "motion": {
+      "talk": {
+        "popFrom": 0.93,
+        "popTo": 1.0,
+        "wobbleDeg": 1.6,
+        "wobbleHz": 8,
+        "ease": "damped-spring"
+      },
+      "hug": {
+        "squeezeFromSec": 24.75,
+        "squeezePulse": 1.045
+      },
+      "hold-hands": {
+        "squeezeAtSec": 23.0,
+        "squeezePulse": 1.04
+      },
+      "walk": {
+        "bobPx": 18,
+        "swayDeg": 3,
+        "alternateSign": true,
+        "stepEveryBeat": true
+      }
+    },
+    "props": {
+      "handlink": {
+        "hold-hands": {
+          "x": 545,
+          "y": 1635,
+          "w": 130,
+          "h": 70,
+          "popAtSec": 22.4
+        }
+      },
+      "heart": {
+        "x": 540,
+        "y": 690,
+        "size": 120,
+        "popAtSec": 24.75,
+        "floatPx": -50
+      }
+    },
+    "bubbles": {
+      "kai": {
+        "x": 50,
+        "y": 400
+      },
+      "moc": {
+        "x": 550,
+        "y": 400
+      }
+    },
+    "limits": "ảnh tĩnh ⇒ không cử động miệng/tay/chân; 'nắm tay' = biểu tượng nối + áp sát; 'ôm' = nghiêng vào nhau + nhún + tim; 'đi bộ' = nhún bước + đường/skyline trôi (bán thân)"
   }
 }
