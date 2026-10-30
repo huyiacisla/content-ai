@@ -143,11 +143,11 @@
         {
           "id": "l3",
           "char": "kai",
-          "startSec": 5.0,
+          "startSec": 4.5,
           "endSec": 6.0,
-          "startFrame": 150,
+          "startFrame": 135,
           "endFrame": 180,
-          "beat": 10,
+          "beat": 9,
           "text": "Bài thuyết trình đó!",
           "in": "spring-pop",
           "out": "hard-cut"

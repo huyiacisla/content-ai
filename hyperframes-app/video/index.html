@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="vi" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-vietnamese-700-normal.woff2") format("woff2"); unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB; }
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-latin-ext-700-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+      :root {
+        --ground: #FFFFFF;
+        --ink: #1B2A41;
+        --blue: #7EC8F0;
+        --accent: #FF7A45;
+        --font-display: "Quicksand", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font-display); font-weight: 700; color: var(--ink); }
+      .scene { position: absolute; inset: 0; }
+      .chip { position: absolute; left: 50px; top: 90px; padding: 14px 30px; border-radius: 40px; background: var(--blue); font-size: 40px; }
+      .title { position: absolute; left: 50px; top: 170px; width: 980px; font-size: 104px; line-height: 1.1; }
+      .bar { position: absolute; left: 50px; top: 300px; width: 260px; height: 16px; border-radius: 8px; background: var(--accent); transform-origin: left center; }
+      .card { position: absolute; border-radius: 56px; overflow: hidden; border: 8px solid var(--blue); background: var(--blue); }
+      .card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+      .name { position: absolute; left: 24px; bottom: 24px; padding: 8px 26px; border-radius: 30px; background: var(--ground); font-size: 40px; }
+      .bubble { position: absolute; width: 480px; padding: 36px 40px; border-radius: 48px; background: var(--blue); font-size: 62px; line-height: 1.2; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920">
+      <div class="clip scene" data-start="0" data-duration="6" data-track-index="1">
+        <div class="chip" id="chip-hook">01 · Hook</div>
+        <div class="title" id="title-hook">Mai nộp bài rồi!</div>
+        <div class="bar" id="bar-hook"></div>
+      </div>
+      <div class="clip scene" data-start="6" data-duration="8" data-track-index="1">
+        <div class="chip" id="chip-problem">02 · Vấn đề</div>
+        <div class="title" id="title-problem">Còn vài tiếng thôi</div>
+        <div class="bar" id="bar-problem"></div>
+      </div>
+      <div class="clip scene" data-start="14" data-duration="10" data-track-index="1">
+        <div class="chip" id="chip-solution">03 · Giải pháp</div>
+        <div class="title" id="title-solution">Chia 3 việc</div>
+        <div class="bar" id="bar-solution"></div>
+      </div>
+      <div class="clip scene" data-start="24" data-duration="6" data-track-index="1">
+        <div class="chip" id="chip-cta">04 · CTA</div>
+        <div class="title" id="title-cta">Làm ngay hôm nay</div>
+        <div class="bar" id="bar-cta"></div>
+      </div>
+      <div class="card" id="card-kai" style="left:50px;top:330px;width:470px;height:820px">
+        <img src="assets/kai.jpg" alt="Kai" />
+        <div class="name">Kai</div>
+      </div>
+      <div class="card" id="card-moc" style="left:560px;top:740px;width:470px;height:840px">
+        <img src="assets/moc.jpg" alt="Mộc" />
+        <div class="name">Mộc</div>
+      </div>
+      <div class="clip bubble kai" id="l1" data-start="1" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:400px">Mộc! Bài mai nộp chưa?</div>
+      <div class="clip bubble moc" id="l2" data-start="3" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:1230px">Hả? Bài nào cơ?</div>
+      <div class="clip bubble kai" id="l3" data-start="4.5" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:400px">Bài thuyết trình đó!</div>
+      <div class="clip bubble moc" id="l4" data-start="6" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:1230px">Quên mất! Mới làm nửa.</div>
+      <div class="clip bubble kai" id="l5" data-start="8" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:400px">Còn mấy tiếng thôi!</div>
+      <div class="clip bubble moc" id="l6" data-start="10" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:1230px">Tối nay thức trắng à?</div>
+      <div class="clip bubble kai" id="l7" data-start="12" data-duration="2" data-track-index="2"
+        style="left:550px;top:400px">Chia việc đi, nhanh hơn!</div>
+      <div class="clip bubble kai" id="l8" data-start="14" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:400px">Mình làm slide.</div>
+      <div class="clip bubble moc" id="l9" data-start="16" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:1230px">Tớ viết nội dung.</div>
+      <div class="clip bubble kai" id="l10" data-start="18" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:400px">Chín giờ xong, ngủ sớm.</div>
+      <div class="clip bubble moc" id="l11" data-start="20" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:1230px">Chốt! Lập checklist nhé.</div>
+      <div class="clip bubble kai" id="l12" data-start="24" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:400px">Bắt đầu ngay nào!</div>
+      <div class="clip bubble moc" id="l13" data-start="26" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:1230px">Mai nộp đúng hạn!</div>
+      <audio id="music" src="assets/music-120bpm.mp3" data-start="0" data-duration="30" data-volume="0.5"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#chip-hook", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 0);
+      tl.fromTo("#title-hook", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 0);
+      tl.fromTo("#bar-hook", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 0.1);
+      tl.fromTo("#chip-problem", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 6);
+      tl.fromTo("#title-problem", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 6);
+      tl.fromTo("#bar-problem", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 6.1);
+      tl.fromTo("#chip-solution", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 14);
+      tl.fromTo("#title-solution", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 14);
+      tl.fromTo("#bar-solution", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 14.1);
+      tl.fromTo("#chip-cta", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 24);
+      tl.fromTo("#title-cta", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 24);
+      tl.fromTo("#bar-cta", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 24.1);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 0);
+      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 0);
+      tl.fromTo("#l1", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 1);
+      tl.set("#card-kai", {scale: 1, opacity: 1}, 1);
+      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 1);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 2.5);
+      tl.fromTo("#l2", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 3);
+      tl.set("#card-moc", {scale: 1, opacity: 1}, 3);
+      tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 3);
+      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 4.5);
+      tl.fromTo("#l3", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 4.5);
+      tl.set("#card-kai", {scale: 1, opacity: 1}, 4.5);
+      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 4.5);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 6);
+      tl.fromTo("#l4", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 6);
+      tl.set("#card-moc", {scale: 1, opacity: 1}, 6);
+      tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 6);
+      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 7.5);
+      tl.fromTo("#l5", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 8);
+      tl.set("#card-kai", {scale: 1, opacity: 1}, 8);
+      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 8);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 9.5);
+      tl.fromTo("#l6", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 10);
+      tl.set("#card-moc", {scale: 1, opacity: 1}, 10);
+      tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 10);
+      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 11.5);
+      tl.fromTo("#l7", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 12);
+      tl.set("#card-kai", {scale: 1, opacity: 1}, 12);
+      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 12);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 14);
+      tl.fromTo("#l8", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 14);
+      tl.set("#card-kai", {scale: 1, opacity: 1}, 14);
+      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 14);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 15.5);
+      tl.fromTo("#l9", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 16);
+      tl.set("#card-moc", {scale: 1, opacity: 1}, 16);
+      tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 16);
+      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 17.5);
+      tl.fromTo("#l10", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 18);
+      tl.set("#card-kai", {scale: 1, opacity: 1}, 18);
+      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 18);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 19.5);
+      tl.fromTo("#l11", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 20);
+      tl.set("#card-moc", {scale: 1, opacity: 1}, 20);
+      tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 20);
+      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 21.5);
+      tl.fromTo("#l12", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 24);
+      tl.set("#card-kai", {scale: 1, opacity: 1}, 24);
+      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 24);
+      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 25.5);
+      tl.fromTo("#l13", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 26);
+      tl.set("#card-moc", {scale: 1, opacity: 1}, 26);
+      tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 26);
+      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 27.5);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
