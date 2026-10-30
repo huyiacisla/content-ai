@@ -28,51 +28,23 @@
     "id": "jester",
     "name": "Hề Chuột 3 Đầu",
     "reference": "jester3d/reference.jpg",
-    "model": "jester3d/src/createObjectModel.ts (img2threejs blockout, 81 thành phần)",
     "look": "3 đầu (vương miện / nón phù thủy nháy mắt lè lưỡi / mũ cao chán đời), 6 tay, cổ xếp nếp, quần hề kim cương, giày mũi cong, 2 đuôi có bùa",
-    "projection": {
-      "method": "front-orthographic",
-      "note": "UV mỗi đỉnh = vị trí thế giới lúc đứng yên → pixel ảnh gốc; nền ảnh tách trong suốt (flood-fill từ góc) ⇒ viền model cắt theo viền tranh; vật liệu unlit giữ đúng nét vẽ",
+    "rig": {
+      "body": "pivot hông (627,1000) — lắc hông; mang đầu, tay, đuôi",
+      "heads": "pivot cổ — nghiêng canon",
+      "arms": "pivot vai — 3 tầng mỗi bên",
+      "legs": "pivot hông — nhấc xen kẽ",
+      "tails": "pivot gốc đuôi — quẫy",
       "pixelToWorld": {
         "x": "(px - 627) / 300",
         "y": "(1130 - py) / 300"
-      },
-      "safeYawDeg": 30,
-      "texture": "assets/jester-proj.png"
+      }
     },
-    "rig": {
-      "arms": {
-        "shoulders": {
-          "up": [
-            0.357,
-            2.333
-          ],
-          "mid": [
-            0.39,
-            2.2
-          ],
-          "low": [
-            0.407,
-            2.083
-          ]
-        },
-        "pivot": "vai (xoay quanh trục Z)"
-      },
-      "heads": {
-        "pivot": "cổ (đáy đầu)",
-        "ids": [
-          "head-c",
-          "head-w",
-          "head-t"
-        ]
-      },
-      "legs": {
-        "pivot": "hông; ống + giày nhấc cùng nhau"
-      },
-      "tails": {
-        "pivot": "gốc đuôi"
-      },
-      "body": "toàn thân nhún + xoay Y"
+    "method": {
+      "kind": "puppet-2.5d",
+      "tool": "hyperframes-app/halloween3d/tools/cut_parts.py",
+      "note": "cắt nhân vật từ chính tranh thành tấm alpha có khớp (3 đầu kèm mũ/tai, thân+quần, 6 tay kèm bàn tay/đạo cụ, 2 chân+giày, 2 đuôi+bùa, ngôi sao); xếp lớp theo z cho thị sai; viền co 1px + làm mịn, render alphaToCoverage",
+      "parts": "assets/parts.json"
     }
   },
   "style": {
@@ -93,8 +65,9 @@
     "background": "trời đêm tím đậm chuyển sắc, trăng tròn, 3 con dơi bay lượn, 2 bí ngô ở đáy, đèn sàn tròn",
     "doNot": [
       "fade mặc định",
-      "xoay quá ±30° (lộ mặt bên bị kéo dài do chiếu ảnh)"
-    ]
+      "xoay quá ±10° (tấm phẳng lộ mỏng)"
+    ],
+    "maxYawDeg": 10
   },
   "camera": [
     {
@@ -117,8 +90,8 @@
       "endSec": 10,
       "move": "lắc nhẹ trái-phải theo ô nhịp",
       "yawDeg": [
-        -8,
-        8
+        -4,
+        4
       ],
       "dist": [
         13,
@@ -131,12 +104,12 @@
       "endSec": 14,
       "move": "quỹ đạo nửa vòng nhỏ",
       "yawDeg": [
-        -22,
-        22
+        -8,
+        8
       ],
       "dist": [
         13,
-        12.6
+        13
       ]
     },
     {
@@ -149,8 +122,8 @@
         0
       ],
       "dist": [
-        12.6,
-        11.6
+        13,
+        12.4
       ]
     }
   ],
@@ -208,7 +181,7 @@
       "startSec": 10,
       "endSec": 14,
       "moves": [
-        "xoay thân ±25° theo ô nhịp",
+        "xoay thân ±10° theo ô nhịp + lắc hông",
         "tay tầng trên đẩy trần (raise the roof)",
         "nhún sâu nhịp 1 và 3"
       ],
@@ -270,8 +243,8 @@
     }
   ],
   "limits": [
-    "chiếu ảnh 1 góc chính diện ⇒ chỉ đẹp trong ±30°; mặt bên/sau là pixel bị kéo dài",
-    "khối blockout chưa khớp hết viền tranh ⇒ vài chỗ nhỏ bị khuyết (đuôi mảnh, ngôi sao, bùa)",
-    "mặt không đổi biểu cảm (ảnh tĩnh)"
+    "puppet phẳng: chỉ xoay được góc nhỏ (≤10°), chiều sâu đến từ lớp z",
+    "mặt không đổi biểu cảm (ảnh tĩnh)",
+    "tay/chân xoay quanh khớp như rối giấy, ¬ uốn khuỷu"
   ]
 }

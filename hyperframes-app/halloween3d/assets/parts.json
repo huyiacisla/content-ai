@@ -1,0 +1,238 @@
+{
+ "size": [
+  1254,
+  1254
+ ],
+ "pxPerUnit": 300,
+ "origin": [
+  627,
+  1130
+ ],
+ "parts": {
+  "star": {
+   "file": "assets/parts/star.png",
+   "bbox": [
+    1126,
+    345,
+    1190,
+    435
+   ],
+   "pivot": [
+    1160,
+    385
+   ],
+   "z": 0.22,
+   "group": "prop"
+  },
+  "up-R": {
+   "file": "assets/parts/up-R.png",
+   "bbox": [
+    81,
+    306,
+    472,
+    522
+   ],
+   "pivot": [
+    470,
+    480
+   ],
+   "z": 0.07,
+   "group": "arm"
+  },
+  "mid-R": {
+   "file": "assets/parts/mid-R.png",
+   "bbox": [
+    249,
+    492,
+    472,
+    580
+   ],
+   "pivot": [
+    470,
+    530
+   ],
+   "z": 0.04,
+   "group": "arm"
+  },
+  "low-R": {
+   "file": "assets/parts/low-R.png",
+   "bbox": [
+    59,
+    486,
+    472,
+    728
+   ],
+   "pivot": [
+    470,
+    600
+   ],
+   "z": 0.07,
+   "group": "arm"
+  },
+  "up-L": {
+   "file": "assets/parts/up-L.png",
+   "bbox": [
+    769,
+    368,
+    1184,
+    557
+   ],
+   "pivot": [
+    770,
+    470
+   ],
+   "z": 0.07,
+   "group": "arm"
+  },
+  "mid-L": {
+   "file": "assets/parts/mid-L.png",
+   "bbox": [
+    769,
+    499,
+    967,
+    585
+   ],
+   "pivot": [
+    770,
+    530
+   ],
+   "z": 0.04,
+   "group": "arm"
+  },
+  "low-L": {
+   "file": "assets/parts/low-L.png",
+   "bbox": [
+    769,
+    526,
+    1212,
+    736
+   ],
+   "pivot": [
+    770,
+    600
+   ],
+   "z": 0.07,
+   "group": "arm"
+  },
+  "head-w": {
+   "file": "assets/parts/head-w.png",
+   "bbox": [
+    181,
+    51,
+    504,
+    432
+   ],
+   "pivot": [
+    430,
+    410
+   ],
+   "z": 0.12,
+   "group": "head"
+  },
+  "head-c": {
+   "file": "assets/parts/head-c.png",
+   "bbox": [
+    371,
+    14,
+    863,
+    380
+   ],
+   "pivot": [
+    627,
+    378
+   ],
+   "z": 0.17,
+   "group": "head"
+  },
+  "head-t": {
+   "file": "assets/parts/head-t.png",
+   "bbox": [
+    755,
+    100,
+    1093,
+    427
+   ],
+   "pivot": [
+    820,
+    400
+   ],
+   "z": 0.12,
+   "group": "head"
+  },
+  "tail-R": {
+   "file": "assets/parts/tail-R.png",
+   "bbox": [
+    146,
+    776,
+    302,
+    1007
+   ],
+   "pivot": [
+    300,
+    790
+   ],
+   "z": -0.12,
+   "group": "tail"
+  },
+  "tail-L": {
+   "file": "assets/parts/tail-L.png",
+   "bbox": [
+    889,
+    768,
+    1109,
+    988
+   ],
+   "pivot": [
+    890,
+    800
+   ],
+   "z": -0.12,
+   "group": "tail"
+  },
+  "leg-R": {
+   "file": "assets/parts/leg-R.png",
+   "bbox": [
+    162,
+    884,
+    607,
+    1193
+   ],
+   "pivot": [
+    510,
+    890
+   ],
+   "z": -0.04,
+   "group": "leg"
+  },
+  "leg-L": {
+   "file": "assets/parts/leg-L.png",
+   "bbox": [
+    638,
+    884,
+    1105,
+    1207
+   ],
+   "pivot": [
+    800,
+    890
+   ],
+   "z": -0.04,
+   "group": "leg"
+  },
+  "body": {
+   "file": "assets/parts/body.png",
+   "bbox": [
+    298,
+    326,
+    962,
+    888
+   ],
+   "pivot": [
+    627,
+    1000
+   ],
+   "z": 0.0,
+   "group": "body"
+  }
+ }
+}

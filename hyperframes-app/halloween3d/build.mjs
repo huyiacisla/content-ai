@@ -1,5 +1,5 @@
 // Đọc briefs/halloween-dance.json ⇒ ghi index.html + bundle stage/stage.ts → assets/stage.js
-// Chạy: npm install && node build.mjs
+// Chạy: npm install && python3 tools/cut_parts.py && node build.mjs
 import {readFileSync, writeFileSync} from 'node:fs';
 import {build} from 'esbuild';
 
@@ -75,7 +75,7 @@ const html = `<!doctype html>
       <canvas id="stage" class="clip" width="1080" height="1920" data-start="0" data-duration="${dur}" data-track-index="0"></canvas>${overlays}
       <audio id="music" src="${brief.meta.music.src}" data-start="0" data-duration="${dur}" data-volume="${brief.meta.music.volume}"></audio>
     </div>
-    <script>window.__BRIEF = ${JSON.stringify(brief)}; window.__ARMS = ${readFileSync(new URL('./assets/arms.json', import.meta.url), 'utf8')};</script>
+    <script>window.__BRIEF = ${JSON.stringify(brief)}; window.__PARTS = ${JSON.stringify(JSON.parse(readFileSync(new URL('./assets/parts.json', import.meta.url), 'utf8')))};</script>
     <script type="module" src="assets/stage.js"></script>
     <script>
       const tl = gsap.timeline({ paused: true });
