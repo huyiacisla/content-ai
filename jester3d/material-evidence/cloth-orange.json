@@ -1,0 +1,87 @@
+{
+  "ok": true,
+  "verdict": "pass",
+  "confidence": 0.785,
+  "estimatedFidelity": 0.785,
+  "targetThreshold": 0.7,
+  "materialId": "cloth-orange",
+  "sourceImage": "/home/user/content-ai/jester3d/crops/cloth-orange.png",
+  "outDir": "/home/user/content-ai/jester3d/material-evidence/cloth-orange",
+  "palette": [
+    "#D06E26",
+    "#D16F1D",
+    "#2F4F4F",
+    "#EA8B31",
+    "#A3693F"
+  ],
+  "maps": {
+    "albedo": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/cloth-orange/cloth-orange_albedo.png",
+      "url": "cloth-orange_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+    },
+    "roughness": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/cloth-orange/cloth-orange_roughness.png",
+      "url": "cloth-orange_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+    },
+    "height": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/cloth-orange/cloth-orange_height.png",
+      "url": "cloth-orange_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+    },
+    "normal": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/cloth-orange/cloth-orange_normal.png",
+      "url": "cloth-orange_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+    },
+    "ao": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/cloth-orange/cloth-orange_ao.png",
+      "url": "cloth-orange_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+    }
+  },
+  "diagnostics": {
+    "sourceWidth": 216,
+    "sourceHeight": 216,
+    "mapSize": 1024,
+    "cropBBoxPixels": {
+      "x": 0,
+      "y": 0,
+      "width": 216,
+      "height": 216
+    },
+    "mask": {
+      "backgroundColor": "#CE6E6A",
+      "backgroundNoise": 158.155,
+      "transparentPixelFraction": 0.0,
+      "foregroundCoverage": 0.9731
+    },
+    "mapStats": {
+      "valueRange": 0.3015,
+      "heightP90Gradient": 0.02005,
+      "roughnessBase": 0.683,
+      "roughnessVariation": 0.05,
+      "normalStrength": 0.18,
+      "blurRadius": 21
+    },
+    "palette": [
+      "#D06E26",
+      "#D16F1D",
+      "#2F4F4F",
+      "#EA8B31",
+      "#A3693F"
+    ]
+  },
+  "warnings": [
+    "image is not clearly isolated from background; using most pixels as material evidence",
+    "object/background separation is weak",
+    "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+  ],
+  "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+}

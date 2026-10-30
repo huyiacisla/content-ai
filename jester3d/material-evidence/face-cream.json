@@ -1,0 +1,86 @@
+{
+  "ok": true,
+  "verdict": "pass",
+  "confidence": 0.802,
+  "estimatedFidelity": 0.802,
+  "targetThreshold": 0.7,
+  "materialId": "face-cream",
+  "sourceImage": "/home/user/content-ai/jester3d/crops/face-cream.png",
+  "outDir": "/home/user/content-ai/jester3d/material-evidence/face-cream",
+  "palette": [
+    "#F1DFC7",
+    "#EEDBC2",
+    "#F3E3CA",
+    "#E5CFB7",
+    "#4B4038"
+  ],
+  "maps": {
+    "albedo": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/face-cream/face-cream_albedo.png",
+      "url": "face-cream_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+    },
+    "roughness": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/face-cream/face-cream_roughness.png",
+      "url": "face-cream_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+    },
+    "height": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/face-cream/face-cream_height.png",
+      "url": "face-cream_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+    },
+    "normal": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/face-cream/face-cream_normal.png",
+      "url": "face-cream_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+    },
+    "ao": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/face-cream/face-cream_ao.png",
+      "url": "face-cream_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+    }
+  },
+  "diagnostics": {
+    "sourceWidth": 160,
+    "sourceHeight": 160,
+    "mapSize": 1024,
+    "cropBBoxPixels": {
+      "x": 0,
+      "y": 0,
+      "width": 160,
+      "height": 160
+    },
+    "mask": {
+      "backgroundColor": "#F1E1C8",
+      "backgroundNoise": 23.388,
+      "transparentPixelFraction": 0.0,
+      "foregroundCoverage": 0.6067
+    },
+    "mapStats": {
+      "valueRange": 0.08,
+      "heightP90Gradient": 0.01573,
+      "roughnessBase": 0.685,
+      "roughnessVariation": 0.05,
+      "normalStrength": 0.175,
+      "blurRadius": 21
+    },
+    "palette": [
+      "#F1DFC7",
+      "#EEDBC2",
+      "#F3E3CA",
+      "#E5CFB7",
+      "#4B4038"
+    ]
+  },
+  "warnings": [
+    "single-image inverse rendering cannot prove true physical PBR; confidence is capped",
+    "low value range weakens height/roughness inference"
+  ],
+  "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+}

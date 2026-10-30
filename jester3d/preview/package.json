@@ -1,0 +1,1 @@
+{"name":"jester-preview","private":true,"type":"module","dependencies":{"three":"^0.186.1"},"devDependencies":{"esbuild":"^0.25.0"}}

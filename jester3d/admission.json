@@ -1,0 +1,14 @@
+{
+  "admitted": true,
+  "reasons": [],
+  "provenance": {
+    "viewpoint": "reference",
+    "sourcePath": "/home/user/content-ai/jester3d/reference.jpg",
+    "width": 1254,
+    "height": 1254,
+    "foregroundCoverage": 0.4819,
+    "largestComponentFraction": 1.0,
+    "pHash": 12603023038349940900,
+    "duplicateOfHash": null
+  }
+}

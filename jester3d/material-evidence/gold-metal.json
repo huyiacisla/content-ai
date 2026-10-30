@@ -1,0 +1,88 @@
+{
+  "ok": true,
+  "verdict": "pass",
+  "confidence": 0.725,
+  "estimatedFidelity": 0.725,
+  "targetThreshold": 0.7,
+  "materialId": "gold-metal",
+  "sourceImage": "/home/user/content-ai/jester3d/crops/gold-metal.png",
+  "outDir": "/home/user/content-ai/jester3d/material-evidence/gold-metal",
+  "palette": [
+    "#D99E41",
+    "#9F671F",
+    "#B27C37",
+    "#49290D",
+    "#E1B66F"
+  ],
+  "maps": {
+    "albedo": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/gold-metal/gold-metal_albedo.png",
+      "url": "gold-metal_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+    },
+    "roughness": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/gold-metal/gold-metal_roughness.png",
+      "url": "gold-metal_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+    },
+    "height": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/gold-metal/gold-metal_height.png",
+      "url": "gold-metal_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+    },
+    "normal": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/gold-metal/gold-metal_normal.png",
+      "url": "gold-metal_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+    },
+    "ao": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/gold-metal/gold-metal_ao.png",
+      "url": "gold-metal_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+    }
+  },
+  "diagnostics": {
+    "sourceWidth": 128,
+    "sourceHeight": 128,
+    "mapSize": 1024,
+    "cropBBoxPixels": {
+      "x": 0,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    "mask": {
+      "backgroundColor": "#E7D7C2",
+      "backgroundNoise": 151.344,
+      "transparentPixelFraction": 0.0,
+      "foregroundCoverage": 0.9756
+    },
+    "mapStats": {
+      "valueRange": 0.5897,
+      "heightP90Gradient": 0.00618,
+      "roughnessBase": 0.684,
+      "roughnessVariation": 0.05,
+      "normalStrength": 0.163,
+      "blurRadius": 21
+    },
+    "palette": [
+      "#D99E41",
+      "#9F671F",
+      "#B27C37",
+      "#49290D",
+      "#E1B66F"
+    ]
+  },
+  "warnings": [
+    "image is not clearly isolated from background; using most pixels as material evidence",
+    "object/background separation is weak",
+    "single-image inverse rendering cannot prove true physical PBR; confidence is capped",
+    "low high-frequency detail weakens normal/roughness inference"
+  ],
+  "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+}

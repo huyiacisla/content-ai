@@ -1,0 +1,11 @@
+{
+  "path": "/home/user/content-ai/jester3d/reference.jpg",
+  "type": "jpeg",
+  "bytes": 209702,
+  "width": 1254,
+  "height": 1254,
+  "aspectRatio": 1.0,
+  "technicalSuitability": "pass",
+  "warnings": [],
+  "note": "This is only technical image probing. Semantic object suitability still requires visual inspection."
+}

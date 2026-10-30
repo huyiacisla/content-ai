@@ -1,0 +1,87 @@
+{
+  "ok": true,
+  "verdict": "pass",
+  "confidence": 0.727,
+  "estimatedFidelity": 0.727,
+  "targetThreshold": 0.7,
+  "materialId": "fur-black",
+  "sourceImage": "/home/user/content-ai/jester3d/crops/fur-black.png",
+  "outDir": "/home/user/content-ai/jester3d/material-evidence/fur-black",
+  "palette": [
+    "#24221E",
+    "#13130F",
+    "#282521",
+    "#1E1D19",
+    "#191814"
+  ],
+  "maps": {
+    "albedo": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/fur-black/fur-black_albedo.png",
+      "url": "fur-black_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+    },
+    "roughness": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/fur-black/fur-black_roughness.png",
+      "url": "fur-black_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+    },
+    "height": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/fur-black/fur-black_height.png",
+      "url": "fur-black_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+    },
+    "normal": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/fur-black/fur-black_normal.png",
+      "url": "fur-black_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+    },
+    "ao": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/fur-black/fur-black_ao.png",
+      "url": "fur-black_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+    }
+  },
+  "diagnostics": {
+    "sourceWidth": 160,
+    "sourceHeight": 160,
+    "mapSize": 1024,
+    "cropBBoxPixels": {
+      "x": 0,
+      "y": 0,
+      "width": 160,
+      "height": 160
+    },
+    "mask": {
+      "backgroundColor": "#232321",
+      "backgroundNoise": 5.385,
+      "transparentPixelFraction": 0.0,
+      "foregroundCoverage": 0.1042
+    },
+    "mapStats": {
+      "valueRange": 0.08,
+      "heightP90Gradient": 0.00591,
+      "roughnessBase": 0.68,
+      "roughnessVariation": 0.05,
+      "normalStrength": 0.163,
+      "blurRadius": 21
+    },
+    "palette": [
+      "#24221E",
+      "#13130F",
+      "#282521",
+      "#1E1D19",
+      "#191814"
+    ]
+  },
+  "warnings": [
+    "single-image inverse rendering cannot prove true physical PBR; confidence is capped",
+    "low value range weakens height/roughness inference",
+    "low high-frequency detail weakens normal/roughness inference"
+  ],
+  "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+}

@@ -1,0 +1,87 @@
+{
+  "ok": true,
+  "verdict": "pass",
+  "confidence": 0.779,
+  "estimatedFidelity": 0.779,
+  "targetThreshold": 0.7,
+  "materialId": "shoe-satin",
+  "sourceImage": "/home/user/content-ai/jester3d/crops/shoe-satin.png",
+  "outDir": "/home/user/content-ai/jester3d/material-evidence/shoe-satin",
+  "palette": [
+    "#316E74",
+    "#397B7D",
+    "#2C5457",
+    "#122B2E",
+    "#BD9549"
+  ],
+  "maps": {
+    "albedo": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/shoe-satin/shoe-satin_albedo.png",
+      "url": "shoe-satin_albedo.png",
+      "channel": "albedo",
+      "source": "reference-pixel-extraction"
+    },
+    "roughness": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/shoe-satin/shoe-satin_roughness.png",
+      "url": "shoe-satin_roughness.png",
+      "channel": "roughness",
+      "source": "reference-pixel-extraction"
+    },
+    "height": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/shoe-satin/shoe-satin_height.png",
+      "url": "shoe-satin_height.png",
+      "channel": "height",
+      "source": "reference-pixel-extraction"
+    },
+    "normal": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/shoe-satin/shoe-satin_normal.png",
+      "url": "shoe-satin_normal.png",
+      "channel": "normal",
+      "source": "reference-pixel-extraction"
+    },
+    "ao": {
+      "path": "/home/user/content-ai/jester3d/material-evidence/shoe-satin/shoe-satin_ao.png",
+      "url": "shoe-satin_ao.png",
+      "channel": "ao",
+      "source": "reference-pixel-extraction"
+    }
+  },
+  "diagnostics": {
+    "sourceWidth": 216,
+    "sourceHeight": 216,
+    "mapSize": 1024,
+    "cropBBoxPixels": {
+      "x": 0,
+      "y": 0,
+      "width": 216,
+      "height": 216
+    },
+    "mask": {
+      "backgroundColor": "#C39363",
+      "backgroundNoise": 165.415,
+      "transparentPixelFraction": 0.0,
+      "foregroundCoverage": 0.9607
+    },
+    "mapStats": {
+      "valueRange": 0.2776,
+      "heightP90Gradient": 0.02246,
+      "roughnessBase": 0.686,
+      "roughnessVariation": 0.05,
+      "normalStrength": 0.183,
+      "blurRadius": 21
+    },
+    "palette": [
+      "#316E74",
+      "#397B7D",
+      "#2C5457",
+      "#122B2E",
+      "#BD9549"
+    ]
+  },
+  "warnings": [
+    "image is not clearly isolated from background; using most pixels as material evidence",
+    "object/background separation is weak",
+    "single-image inverse rendering cannot prove true physical PBR; confidence is capped"
+  ],
+  "limitation": "single-image PBR extraction is an estimate; 70%+ extraction confidence still needs render screenshot review"
+}

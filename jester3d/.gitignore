@@ -1,0 +1,4 @@
+preview/node_modules/
+preview/bundle.js
+preview/*.png
+.img2threejs/
