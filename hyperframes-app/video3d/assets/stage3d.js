@@ -310,6 +310,28 @@ function solveArm(arm, Sh, T, pole) {
   arm.hand.position.copy(Tn);
 }
 
+// ---- cử chỉ khi nói (hàm thuần của t ⇒ seek-safe) ----
+// vị trí tay (hệ cục bộ nhân vật; vai ở (±0.66, 2.0, 0)); s = +1 trái / −1 phải
+const GESTURES = {
+  wave:   (s, u) => [s * 1.0, 3.0 + Math.sin(u * 14) * 0.15, 0.3 + Math.sin(u * 14) * 0.3],
+  point:  (s, u) => [s * 0.7, 2.35 + Math.sin(u * 6) * 0.05, 1.15],
+  open:   (s, u) => [s * 1.15, 1.75 + Math.sin(u * 5) * 0.12, 0.6],
+  count:  (s, u) => [s * 0.55, 2.9 + Math.sin(u * 7) * 0.12, 0.7],
+  chop:   (s, u) => [s * 0.55, 2.0 + Math.sin(u * 8) * 0.4, 0.95],
+  scratch:(s, u) => [s * 0.5, 3.75 + Math.sin(u * 16) * 0.05, 0.25 + Math.sin(u * 16) * 0.08],
+  fist:   (s, u) => [s * 0.5, 2.9, 0.6 + Math.sin(u * 9) * 0.05],
+};
+// gán cử chỉ theo từng câu thoại: 'kênh@giây'. both = cả hai tay
+const GEST = {
+  'kai@1': {g: 'wave'}, 'moc@3': {g: 'scratch'}, 'kai@4.5': {g: 'point'},
+  'moc@6': {g: 'open', both: true}, 'kai@8': {g: 'chop'}, 'moc@10': {g: 'open', both: true},
+  'kai@12': {g: 'point'}, 'kai@14': {g: 'point'}, 'moc@16': {g: 'chop'},
+  'kai@18': {g: 'count'}, 'moc@20': {g: 'fist'}, 'kai@24': {g: 'fist'}, 'moc@26': {g: 'open', both: true},
+};
+const gestOf = (l) => GEST[`${l.char}@${l.startSec}`];
+// 0→1→0 mượt trong câu thoại (vào 0.25s, ra 0.25s)
+const lineEnv = (l, t) => clamp((t - l.startSec) / 0.25, 0, 1) * clamp((l.endSec - t) / 0.25, 0, 1);
+
 function updateChar(who, t) {
   const ch = chars[who];
   const {st, handsA, handsB, p, it} = poseAt(t, who);
@@ -340,7 +362,11 @@ function updateChar(who, t) {
   // đầu
   ch.headPivot.rotation.z = -st.tilt;
   ch.headPivot.rotation.x = talking ? Math.sin(t * 10) * M.talk.nodRad : Math.sin(t * 1.7) * 0.02;
-  ch.headPivot.rotation.y = isWalk ? 0 : -st.rotY * 0.25;
+  const other = who === 'kai' ? 'moc' : 'kai';
+  const oLine = lines.find((l) => l.char === other && t >= l.startSec - 0.1 && t < l.endSec + 0.1);
+  const listen = oLine && !isWalk ? clamp((t - oLine.startSec + 0.1) / 0.3, 0, 1) * clamp((oLine.endSec + 0.1 - t) / 0.3, 0, 1) : 0;
+  ch.headPivot.rotation.y = (isWalk ? 0 : -st.rotY * 0.25) + listen * (who === 'kai' ? 0.3 : -0.3);
+  ch.headPivot.rotation.x += listen * (Math.sin(t * 3.2) * 0.05 + 0.04); // gật nhẹ khi nghe
   const open = talking ? 0.25 + Math.abs(Math.sin(t * M.talk.mouthHz * Math.PI)) * 1.5 : 0.1;
   ch.mouthOpen.scale.y = open;
   const blink = (t + (who === 'kai' ? 0 : 1.1)) % M.idle.blinkEverySec < M.idle.blinkSec ? 0.12 : 1;
@@ -357,6 +383,12 @@ function updateChar(who, t) {
     const s = side === 'L' ? 1 : -1;
     const swing = isWalk ? Math.sin(phase + (side === 'L' ? Math.PI : 0)) * 0.35 * walkAmt : (talking && side === (who === 'kai' ? 'L' : 'R') ? 0.35 + Math.sin(t * 6) * 0.1 : 0);
     const hangLocal = new THREE.Vector3(s * 0.8, 0.95 + (talking ? swing * 0.5 : 0), 0.1 + swing);
+    const gd = line && !isWalk ? gestOf(line) : null;
+    if (gd && (gd.both || side === (who === 'kai' ? 'L' : 'R'))) {
+      const gw = lineEnv(line, t);
+      const gp = GESTURES[gd.g](s, t - line.startSec);
+      hangLocal.lerp(new THREE.Vector3(gp[0], gp[1], gp[2]), gw);
+    }
     const hangW = ch.root.localToWorld(hangLocal.clone());
     const hasA = !!handsA[side], hasB = !!handsB[side];
     let target = hangW;
