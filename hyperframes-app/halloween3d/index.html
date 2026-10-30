@@ -38,7 +38,101 @@
       <div class="clip cap accent" id="t-end" data-start="14" data-duration="2" data-track-index="2">Happy Halloween!</div>
       <audio id="music" src="assets/music-120bpm.mp3" data-start="0" data-duration="16" data-volume="0.5"></audio>
     </div>
-    <script>window.__BRIEF = {"meta":{"title":"Halloween Dance — Hề Chuột 3 Đầu","lang":"vi","engine":"hyperframes + three.js","project":"hyperframes-app/halloween3d","format":{"durationSec":16,"aspect":"9:16","width":1080,"height":1920,"fps":30,"totalFrames":480},"beat":{"bpm":120,"beatSec":0.5,"beatsPerBar":4,"bars":8,"rule":"mọi động tác chốt trên nhịp; đổi động tác mỗi 2 ô nhịp (4s)"},"music":{"src":"assets/music-120bpm.mp3","volume":0.5}},"character":{"id":"jester","name":"Hề Chuột 3 Đầu","reference":"jester3d/reference.jpg","model":"jester3d/src/createObjectModel.ts (img2threejs blockout, 81 thành phần)","look":"3 đầu (vương miện / nón phù thủy nháy mắt lè lưỡi / mũ cao chán đời), 6 tay, cổ xếp nếp, quần hề kim cương, giày mũi cong, 2 đuôi có bùa","projection":{"method":"front-orthographic","note":"UV mỗi đỉnh = vị trí thế giới lúc đứng yên → pixel ảnh gốc; nền ảnh tách trong suốt (flood-fill từ góc) ⇒ viền model cắt theo viền tranh; vật liệu unlit giữ đúng nét vẽ","pixelToWorld":{"x":"(px - 627) / 300","y":"(1130 - py) / 300"},"safeYawDeg":30,"texture":"assets/jester-proj.png"},"rig":{"arms":{"shoulders":{"up":[0.357,2.333],"mid":[0.39,2.2],"low":[0.407,2.083]},"pivot":"vai (xoay quanh trục Z)"},"heads":{"pivot":"cổ (đáy đầu)","ids":["head-c","head-w","head-t"]},"legs":{"pivot":"hông; ống + giày nhấc cùng nhau"},"tails":{"pivot":"gốc đuôi"},"body":"toàn thân nhún + xoay Y"}},"style":{"palette":{"night":"#1a1030","nightTop":"#2b1650","moon":"#f4e9c8","pumpkin":"#f08a1c","purple":"#6a3fa0","teal":"#1f8a86","ink":"#f4e9c8"},"type":{"family":"Quicksand","weight":700,"maxWordsPerText":4},"background":"trời đêm tím đậm chuyển sắc, trăng tròn, 3 con dơi bay lượn, 2 bí ngô ở đáy, đèn sàn tròn","doNot":["fade mặc định","xoay quá ±30° (lộ mặt bên bị kéo dài do chiếu ảnh)"]},"camera":[{"id":"c1","startSec":0,"endSec":2,"move":"đẩy vào từ xa","yawDeg":[0,0],"dist":[16,13]},{"id":"c2","startSec":2,"endSec":10,"move":"lắc nhẹ trái-phải theo ô nhịp","yawDeg":[-8,8],"dist":[13,13]},{"id":"c3","startSec":10,"endSec":14,"move":"quỹ đạo nửa vòng nhỏ","yawDeg":[-22,22],"dist":[13,12.6]},{"id":"c4","startSec":14,"endSec":16,"move":"giật zoom vào khi tạo dáng","yawDeg":[0,0],"dist":[12.6,11.6]}],"choreography":[{"id":"intro","bars":[1,1],"startSec":0,"endSec":2,"moves":["nhún nhẹ mỗi nhịp","đuôi đung đưa"],"text":"HALLOWEEN DANCE"},{"id":"arm-wave","bars":[2,3],"startSec":2,"endSec":6,"moves":["6 tay vẫy sóng từ tầng trên xuống (lệch pha 1/4 nhịp)","thân nhún mỗi nhịp","bước chân trái-phải"],"text":"Vẫy nào!"},{"id":"head-bob","bars":[4,5],"startSec":6,"endSec":10,"moves":["3 đầu gật/nghiêng nối tiếp (canon) trái → giữa → phải","tay tầng giữa vỗ vào nhau","đuôi quẫy mạnh"],"text":"Lắc đầu!"},{"id":"spin-roof","bars":[6,7],"startSec":10,"endSec":14,"moves":["xoay thân ±25° theo ô nhịp","tay tầng trên đẩy trần (raise the roof)","nhún sâu nhịp 1 và 3"],"text":"Quẩy lên!"},{"id":"finale","bars":[8,8],"startSec":14,"endSec":16,"moves":["nhảy bật lên nhịp 1","6 tay giơ cao xòe","đứng tạo dáng"],"text":"Happy Halloween!"}],"overlays":[{"id":"title","text":"HALLOWEEN DANCE","startSec":0,"endSec":2,"pos":"top","accent":"pumpkin"},{"id":"t-wave","text":"Vẫy nào!","startSec":2,"endSec":6,"pos":"top"},{"id":"t-bob","text":"Lắc đầu!","startSec":6,"endSec":10,"pos":"top"},{"id":"t-spin","text":"Quẩy lên!","startSec":10,"endSec":14,"pos":"top"},{"id":"t-end","text":"Happy Halloween!","startSec":14,"endSec":16,"pos":"top","accent":"pumpkin"}],"limits":["chiếu ảnh 1 góc chính diện ⇒ chỉ đẹp trong ±30°; mặt bên/sau là pixel bị kéo dài","khối blockout chưa khớp hết viền tranh ⇒ vài chỗ nhỏ bị khuyết (đuôi mảnh, ngôi sao, bùa)","mặt không đổi biểu cảm (ảnh tĩnh)"]};</script>
+    <script>window.__BRIEF = {"meta":{"title":"Halloween Dance — Hề Chuột 3 Đầu","lang":"vi","engine":"hyperframes + three.js","project":"hyperframes-app/halloween3d","format":{"durationSec":16,"aspect":"9:16","width":1080,"height":1920,"fps":30,"totalFrames":480},"beat":{"bpm":120,"beatSec":0.5,"beatsPerBar":4,"bars":8,"rule":"mọi động tác chốt trên nhịp; đổi động tác mỗi 2 ô nhịp (4s)"},"music":{"src":"assets/music-120bpm.mp3","volume":0.5}},"character":{"id":"jester","name":"Hề Chuột 3 Đầu","reference":"jester3d/reference.jpg","model":"jester3d/src/createObjectModel.ts (img2threejs blockout, 81 thành phần)","look":"3 đầu (vương miện / nón phù thủy nháy mắt lè lưỡi / mũ cao chán đời), 6 tay, cổ xếp nếp, quần hề kim cương, giày mũi cong, 2 đuôi có bùa","projection":{"method":"front-orthographic","note":"UV mỗi đỉnh = vị trí thế giới lúc đứng yên → pixel ảnh gốc; nền ảnh tách trong suốt (flood-fill từ góc) ⇒ viền model cắt theo viền tranh; vật liệu unlit giữ đúng nét vẽ","pixelToWorld":{"x":"(px - 627) / 300","y":"(1130 - py) / 300"},"safeYawDeg":30,"texture":"assets/jester-proj.png"},"rig":{"arms":{"shoulders":{"up":[0.357,2.333],"mid":[0.39,2.2],"low":[0.407,2.083]},"pivot":"vai (xoay quanh trục Z)"},"heads":{"pivot":"cổ (đáy đầu)","ids":["head-c","head-w","head-t"]},"legs":{"pivot":"hông; ống + giày nhấc cùng nhau"},"tails":{"pivot":"gốc đuôi"},"body":"toàn thân nhún + xoay Y"}},"style":{"palette":{"night":"#1a1030","nightTop":"#2b1650","moon":"#f4e9c8","pumpkin":"#f08a1c","purple":"#6a3fa0","teal":"#1f8a86","ink":"#f4e9c8"},"type":{"family":"Quicksand","weight":700,"maxWordsPerText":4},"background":"trời đêm tím đậm chuyển sắc, trăng tròn, 3 con dơi bay lượn, 2 bí ngô ở đáy, đèn sàn tròn","doNot":["fade mặc định","xoay quá ±30° (lộ mặt bên bị kéo dài do chiếu ảnh)"]},"camera":[{"id":"c1","startSec":0,"endSec":2,"move":"đẩy vào từ xa","yawDeg":[0,0],"dist":[16,13]},{"id":"c2","startSec":2,"endSec":10,"move":"lắc nhẹ trái-phải theo ô nhịp","yawDeg":[-8,8],"dist":[13,13]},{"id":"c3","startSec":10,"endSec":14,"move":"quỹ đạo nửa vòng nhỏ","yawDeg":[-22,22],"dist":[13,12.6]},{"id":"c4","startSec":14,"endSec":16,"move":"giật zoom vào khi tạo dáng","yawDeg":[0,0],"dist":[12.6,11.6]}],"choreography":[{"id":"intro","bars":[1,1],"startSec":0,"endSec":2,"moves":["nhún nhẹ mỗi nhịp","đuôi đung đưa"],"text":"HALLOWEEN DANCE"},{"id":"arm-wave","bars":[2,3],"startSec":2,"endSec":6,"moves":["6 tay vẫy sóng từ tầng trên xuống (lệch pha 1/4 nhịp)","thân nhún mỗi nhịp","bước chân trái-phải"],"text":"Vẫy nào!"},{"id":"head-bob","bars":[4,5],"startSec":6,"endSec":10,"moves":["3 đầu gật/nghiêng nối tiếp (canon) trái → giữa → phải","tay tầng giữa vỗ vào nhau","đuôi quẫy mạnh"],"text":"Lắc đầu!"},{"id":"spin-roof","bars":[6,7],"startSec":10,"endSec":14,"moves":["xoay thân ±25° theo ô nhịp","tay tầng trên đẩy trần (raise the roof)","nhún sâu nhịp 1 và 3"],"text":"Quẩy lên!"},{"id":"finale","bars":[8,8],"startSec":14,"endSec":16,"moves":["nhảy bật lên nhịp 1","6 tay giơ cao xòe","đứng tạo dáng"],"text":"Happy Halloween!"}],"overlays":[{"id":"title","text":"HALLOWEEN DANCE","startSec":0,"endSec":2,"pos":"top","accent":"pumpkin"},{"id":"t-wave","text":"Vẫy nào!","startSec":2,"endSec":6,"pos":"top"},{"id":"t-bob","text":"Lắc đầu!","startSec":6,"endSec":10,"pos":"top"},{"id":"t-spin","text":"Quẩy lên!","startSec":10,"endSec":14,"pos":"top"},{"id":"t-end","text":"Happy Halloween!","startSec":14,"endSec":16,"pos":"top","accent":"pumpkin"}],"limits":["chiếu ảnh 1 góc chính diện ⇒ chỉ đẹp trong ±30°; mặt bên/sau là pixel bị kéo dài","khối blockout chưa khớp hết viền tranh ⇒ vài chỗ nhỏ bị khuyết (đuôi mảnh, ngôi sao, bùa)","mặt không đổi biểu cảm (ảnh tĩnh)"]}; window.__ARMS = {
+ "size": [
+  1254,
+  1254
+ ],
+ "arms": {
+  "up-R": {
+   "file": "assets/arms/up-R.png",
+   "bbox": [
+    80,
+    304,
+    470,
+    532
+   ],
+   "pivot": [
+    470,
+    480
+   ]
+  },
+  "mid-R": {
+   "file": "assets/arms/mid-R.png",
+   "bbox": [
+    248,
+    494,
+    470,
+    579
+   ],
+   "pivot": [
+    470,
+    530
+   ]
+  },
+  "low-R": {
+   "file": "assets/arms/low-R.png",
+   "bbox": [
+    56,
+    481,
+    470,
+    728
+   ],
+   "pivot": [
+    470,
+    600
+   ]
+  },
+  "up-L": {
+   "file": "assets/arms/up-L.png",
+   "bbox": [
+    771,
+    300,
+    1184,
+    547
+   ],
+   "pivot": [
+    770,
+    470
+   ]
+  },
+  "mid-L": {
+   "file": "assets/arms/mid-L.png",
+   "bbox": [
+    771,
+    501,
+    966,
+    585
+   ],
+   "pivot": [
+    770,
+    530
+   ]
+  },
+  "low-L": {
+   "file": "assets/arms/low-L.png",
+   "bbox": [
+    771,
+    513,
+    1214,
+    728
+   ],
+   "pivot": [
+    770,
+    600
+   ]
+  }
+ },
+ "star": {
+  "file": "assets/arms/star.png",
+  "bbox": [
+   1120,
+   344,
+   1192,
+   433
+  ]
+ }
+};</script>
     <script type="module" src="assets/stage.js"></script>
     <script>
       const tl = gsap.timeline({ paused: true });

@@ -10,7 +10,7 @@ const W = B.meta.format.width, H = B.meta.format.height;
 
 // factory tải map PBR theo URL tương đối ⇒ thay bằng ảnh 1px (ta dùng vật liệu chiếu ảnh, không cần chúng)
 const BLANK = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==';
-THREE.DefaultLoadingManager.setURLModifier((url) => (url.endsWith('.png') && !url.includes('jester-proj') ? BLANK : url));
+THREE.DefaultLoadingManager.setURLModifier((url) => (url.endsWith('.png') && !url.includes('assets/') ? BLANK : url));
 
 const clamp = (x: number, a: number, b: number) => Math.min(b, Math.max(a, x));
 const smooth = (a: number, b: number, x: number) => { const u = clamp((x - a) / (b - a), 0, 1); return u * u * (3 - 2 * u); };
@@ -60,15 +60,35 @@ function pivotAt(x: number, y: number, z: number, children: string[]) {
   for (const c of children) p.attach(node(c));
   return p;
 }
-const SH = B.character.rig.arms.shoulders;
 const TIERS = ['up', 'mid', 'low'] as const;
-const arms: Record<string, THREE.Group> = {};
-for (const t of TIERS) {
-  for (const side of ['L', 'R']) {
-    const sx = side === 'L' ? 1 : -1; // trái của nhân vật = +X
-    arms[`${t}-${side}`] = pivotAt(sx * SH[t][0], SH[t][1], 0, [`Arm ${t} ${side}__pivot`]);
-  }
+// tay = tấm cắt từ chính tranh (tools/arm_cards.py), xoay quanh vai ⇒ viền đúng nét vẽ, ¬ răng cưa
+const ARMS = (window as any).__ARMS;
+const px2w = (px: number, py: number) => new THREE.Vector3((px - 627) / 300, (1130 - py) / 300, 0);
+const loader = new THREE.TextureLoader();
+async function card(file: string, bbox: number[], origin: THREE.Vector3, z: number) {
+  const t = await loader.loadAsync(file);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 4;
+  const [x0, y0, x1, y1] = bbox;
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry((x1 - x0) / 300, (y1 - y0) / 300),
+    new THREE.MeshBasicMaterial({ map: t, alphaToCoverage: true, side: THREE.DoubleSide }),
+  );
+  mesh.position.copy(px2w((x0 + x1) / 2, (y0 + y1) / 2).sub(origin)).setZ(z);
+  return mesh;
 }
+const arms: Record<string, THREE.Group> = {};
+for (const [id, a] of Object.entries<any>(ARMS.arms)) {
+  const pv = px2w(a.pivot[0], a.pivot[1]);
+  const g = new THREE.Group();
+  g.position.copy(pv);
+  g.add(await card(a.file, a.bbox, pv, id.startsWith('mid') ? 0.02 : 0.05));
+  model.add(g);
+  arms[id] = g;
+}
+const star = await card(ARMS.star.file, ARMS.star.bbox, new THREE.Vector3(), 0.1);
+model.add(star);
+const starRest = star.position.clone();
 const HEADS = [
   {name: 'Left head (witch hat, wink)', x: -0.973},
   {name: 'Centre head (jester)', x: 0},
@@ -90,11 +110,15 @@ const tailRest = tails.map((t) => t.rotation.z);
 const tex = await new THREE.TextureLoader().loadAsync(PROJ.texture);
 tex.colorSpace = THREE.SRGBColorSpace;
 tex.anisotropy = 4;
-const projMat = new THREE.MeshBasicMaterial({ map: tex, alphaTest: 0.5, side: THREE.DoubleSide });
+const projMat = new THREE.MeshBasicMaterial({ map: tex, alphaToCoverage: true, side: THREE.DoubleSide }); // viền mịn nhờ MSAA thay alphaTest cứng
 model.updateMatrixWorld(true);
+const OLD_ARM = /^(Arm |Hand |Cuff scrunchie|Star ball|Playing cards)/; // khối tay cũ ⇒ thay bằng tấm cắt
+const hidden = new THREE.MeshBasicMaterial({ visible: false });
 model.traverse((o) => {
   const m = o as THREE.Mesh;
-  if (!m.isMesh) return;
+  if (!m.isMesh || m.parent === null) return;
+  if (OLD_ARM.test(m.name)) { m.material = hidden; return; }
+  if ((m.material as any) === hidden || Object.values(arms).some((g) => g === m.parent) || m === star) return;
   projectUV(m);
   m.material = projMat;
 });
@@ -143,6 +167,9 @@ function dance(t: number) {
     h.rotation.x = wBob * Math.max(0, Math.sin(ph * 2)) * 0.18;
     h.position.y = (h.userData.y0 ??= h.position.y) + Math.abs(Math.sin(ph)) * 0.05 * wBob;
   });
+
+  star.position.set(starRest.x, starRest.y + Math.sin(Math.PI * beat) * 0.08, starRest.z);
+  star.rotation.z = Math.sin(Math.PI * beat * 0.5) * 0.35;
 
   // chân: nhấc xen kẽ
   legs[0].position.y = (legs[0].userData.y0 ??= legs[0].position.y) + Math.max(0, sB) * 0.16 * steps;
