@@ -21,40 +21,61 @@
       .scene { position: absolute; inset: 0; }
       .chip { position: absolute; left: 50px; top: 90px; padding: 14px 30px; border-radius: 40px; background: var(--blue); font-size: 40px; }
       .title { position: absolute; left: 50px; top: 170px; width: 980px; font-size: 104px; line-height: 1.1; }
+      .bar.ink { background: var(--ink); }
       .bar { position: absolute; left: 50px; top: 300px; width: 260px; height: 16px; border-radius: 8px; background: var(--accent); transform-origin: left center; }
-      .card { position: absolute; border-radius: 56px; overflow: hidden; border: 8px solid var(--blue); background: var(--blue); }
+      .card { z-index: 3; position: absolute; border-radius: 56px; overflow: hidden; border: 8px solid var(--blue); background: var(--blue); }
       .card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-      .name { position: absolute; left: 24px; bottom: 24px; padding: 8px 26px; border-radius: 30px; background: var(--ground); font-size: 40px; }
-      .bubble { position: absolute; width: 480px; padding: 36px 40px; border-radius: 48px; background: var(--blue); font-size: 62px; line-height: 1.2; }
+      .card.kai { z-index: 4; }
+      .name { position: absolute; left: 24px; bottom: 24px; padding: 8px 26px; border-radius: 30px; background: var(--ground); font-size: 48px; }
+      .prop { position: absolute; }
+      .heart { z-index: 6; }
+      .handlink { z-index: 6; border: 8px solid var(--ink); border-radius: 40px; background: #fff; background-image: repeating-linear-gradient(90deg, transparent 0 14px, var(--blue) 14px 22px); }
+      .road { z-index: 2; background: var(--ink); overflow: hidden; }
+      .dashes { position: absolute; left: 0; top: 123px; width: 2600px; height: 14px; background: repeating-linear-gradient(90deg, #fff 0 120px, transparent 120px 240px); }
+      .skyline { z-index: 1; left: 0; width: 1080px; height: 380px; overflow: hidden; }
+      .blocks { position: absolute; left: 0; top: 0; width: 2400px; height: 380px; }
+      .blocks i { position: absolute; bottom: 0; width: 140px; border-radius: 16px 16px 0 0; }
+      .bubble { z-index: 5; position: absolute; width: 480px; padding: 36px 40px; border-radius: 48px; background: var(--blue); font-size: 62px; line-height: 1.2; }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920">
-      <div class="clip scene" data-start="0" data-duration="6" data-track-index="1">
+      <div id="scene-hook" class="clip scene" data-start="0" data-duration="6" data-track-index="1">
         <div class="chip" id="chip-hook">01 · Hook</div>
         <div class="title" id="title-hook">Mai nộp bài rồi!</div>
         <div class="bar" id="bar-hook"></div>
       </div>
-      <div class="clip scene" data-start="6" data-duration="8" data-track-index="1">
+      <div id="scene-problem" class="clip scene" data-start="6" data-duration="8" data-track-index="1">
         <div class="chip" id="chip-problem">02 · Vấn đề</div>
         <div class="title" id="title-problem">Còn vài tiếng thôi</div>
         <div class="bar" id="bar-problem"></div>
       </div>
-      <div class="clip scene" data-start="14" data-duration="10" data-track-index="1">
+      <div id="scene-solution" class="clip scene" data-start="14" data-duration="10" data-track-index="1">
         <div class="chip" id="chip-solution">03 · Giải pháp</div>
         <div class="title" id="title-solution">Chia 3 việc</div>
         <div class="bar" id="bar-solution"></div>
       </div>
-      <div class="clip scene" data-start="24" data-duration="6" data-track-index="1">
+      <div id="scene-cta" class="clip scene" data-start="24" data-duration="6" data-track-index="1">
         <div class="chip" id="chip-cta">04 · CTA</div>
         <div class="title" id="title-cta">Làm ngay hôm nay</div>
-        <div class="bar" id="bar-cta"></div>
+        <div class="bar ink" id="bar-cta"></div>
       </div>
-      <div class="card" id="card-kai" style="left:50px;top:330px;width:470px;height:820px">
+      <div class="clip prop handlink" id="hold-hands-handlink" data-start="22.4" data-duration="1.6000000000000014" data-track-index="3" style="left:475px;top:1223px;width:130px;height:70px"></div>
+      <div class="clip prop heart" id="hug-heart" data-start="24.75" data-duration="2.75" data-track-index="3" style="left:480px;top:630px;width:120px;height:120px">
+        <svg viewBox="0 0 24 24" width="120" height="120"><path fill="var(--accent)" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2 0 3.5 1 5.4 3 1.9-2 3.4-3 5.4-3 3.7 0 5.7 3.9 4.2 7.3C19.500 16.400 12 21 12 21z"/></svg>
+      </div>
+      <div class="clip prop handlink" id="walk-handlink" data-start="27.7" data-duration="2.3000000000000007" data-track-index="3" style="left:445px;top:1499px;width:90px;height:50px"></div>
+      <div class="clip prop road" id="walk-road" data-start="27.5" data-duration="2.5" data-track-index="0" style="left:0;top:1560px;width:1080px;height:260px">
+        <div class="dashes" id="walk-road-dashes"></div>
+      </div>
+      <div class="clip prop skyline" id="walk-skyline" data-start="27.5" data-duration="2.5" data-track-index="0" style="top:1180px">
+        <div class="blocks" id="walk-skyline-blocks"><i style="left:0px;height:220px;background:#BFE3F7"></i><i style="left:160px;height:300px;background:#D6EEFB"></i><i style="left:320px;height:180px;background:#BFE3F7"></i><i style="left:480px;height:340px;background:#D6EEFB"></i><i style="left:640px;height:260px;background:#BFE3F7"></i><i style="left:800px;height:200px;background:#D6EEFB"></i><i style="left:960px;height:320px;background:#BFE3F7"></i><i style="left:1120px;height:240px;background:#D6EEFB"></i><i style="left:1280px;height:220px;background:#BFE3F7"></i><i style="left:1440px;height:300px;background:#D6EEFB"></i><i style="left:1600px;height:180px;background:#BFE3F7"></i><i style="left:1760px;height:340px;background:#D6EEFB"></i><i style="left:1920px;height:260px;background:#BFE3F7"></i><i style="left:2080px;height:200px;background:#D6EEFB"></i><i style="left:2240px;height:320px;background:#BFE3F7"></i></div>
+      </div>
+      <div class="card kai" id="card-kai" style="left:50px;top:330px;width:470px;height:820px">
         <img src="assets/kai.jpg" alt="Kai" />
         <div class="name">Kai</div>
       </div>
-      <div class="card" id="card-moc" style="left:560px;top:740px;width:470px;height:840px">
+      <div class="card moc" id="card-moc" style="left:560px;top:740px;width:470px;height:840px">
         <img src="assets/moc.jpg" alt="Mộc" />
         <div class="name">Mộc</div>
       </div>
@@ -81,9 +102,9 @@
       <div class="clip bubble moc" id="l11" data-start="20" data-duration="1.5" data-track-index="2"
         style="left:50px;top:1230px">Chốt! Lập checklist nhé.</div>
       <div class="clip bubble kai" id="l12" data-start="24" data-duration="1.5" data-track-index="2"
-        style="left:550px;top:400px">Bắt đầu ngay nào!</div>
+        style="left:50px;top:1500px">Bắt đầu ngay nào!</div>
       <div class="clip bubble moc" id="l13" data-start="26" data-duration="1.5" data-track-index="2"
-        style="left:50px;top:1230px">Mai nộp đúng hạn!</div>
+        style="left:550px;top:1500px">Mai nộp đúng hạn!</div>
       <audio id="music" src="assets/music-120bpm.mp3" data-start="0" data-duration="30" data-volume="0.5"></audio>
     </div>
     <script>
@@ -147,13 +168,62 @@
       tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 20);
       tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 21.5);
       tl.fromTo("#l12", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 24);
-      tl.set("#card-kai", {scale: 1, opacity: 1}, 24);
-      tl.fromTo("#card-kai", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 24);
-      tl.set("#card-kai", {scale: 0.94, opacity: 0.55}, 25.5);
       tl.fromTo("#l13", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 26);
-      tl.set("#card-moc", {scale: 1, opacity: 1}, 26);
-      tl.fromTo("#card-moc", {y: 24}, {y: 0, duration: 0.4, ease: "back.out(2.2)"}, 26);
-      tl.set("#card-moc", {scale: 0.94, opacity: 0.55}, 27.5);
+      tl.fromTo("#card-kai", {x: 0, y: 0, scale: 0.94, rotation: 0, opacity: 0.55}, {x: 55, y: 260, scale: 0.9, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(2.2)"}, 22);
+      tl.to("#card-kai", {scale: 0.936, duration: 0.1, ease: "power2.out"}, 23);
+      tl.to("#card-kai", {scale: 0.9, duration: 0.4, ease: "back.out(2.2)"}, 23.1);
+      tl.fromTo("#card-moc", {x: 0, y: 0, scale: 0.94, rotation: 0, opacity: 0.55}, {x: -55, y: -160, scale: 0.9, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(2.2)"}, 22);
+      tl.to("#card-moc", {scale: 0.936, duration: 0.1, ease: "power2.out"}, 23);
+      tl.to("#card-moc", {scale: 0.9, duration: 0.4, ease: "back.out(2.2)"}, 23.1);
+      tl.fromTo("#hold-hands-handlink", {scale: 0.3}, {scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 22.4);
+      tl.fromTo("#card-kai", {x: 55, y: 260, scale: 0.9, rotation: 0, opacity: 1}, {x: 95, y: 270, scale: 0.92, rotation: 7, opacity: 1, duration: 0.6, ease: "back.out(2.2)"}, 24);
+      tl.to("#card-kai", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 24.75);
+      tl.to("#card-kai", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 24.85);
+      tl.to("#card-kai", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 25.25);
+      tl.to("#card-kai", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 25.35);
+      tl.to("#card-kai", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 25.75);
+      tl.to("#card-kai", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 25.85);
+      tl.to("#card-kai", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 26.25);
+      tl.to("#card-kai", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 26.35);
+      tl.to("#card-kai", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 26.75);
+      tl.to("#card-kai", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 26.85);
+      tl.fromTo("#card-moc", {x: -55, y: -160, scale: 0.9, rotation: 0, opacity: 1}, {x: -95, y: -130, scale: 0.92, rotation: -7, opacity: 1, duration: 0.6, ease: "back.out(2.2)"}, 24);
+      tl.to("#card-moc", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 24.75);
+      tl.to("#card-moc", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 24.85);
+      tl.to("#card-moc", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 25.25);
+      tl.to("#card-moc", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 25.35);
+      tl.to("#card-moc", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 25.75);
+      tl.to("#card-moc", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 25.85);
+      tl.to("#card-moc", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 26.25);
+      tl.to("#card-moc", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 26.35);
+      tl.to("#card-moc", {scale: 0.957, duration: 0.1, ease: "power2.out"}, 26.75);
+      tl.to("#card-moc", {scale: 0.92, duration: 0.4, ease: "back.out(2.2)"}, 26.85);
+      tl.fromTo("#hug-heart", {scale: 0}, {scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 24.75);
+      tl.fromTo("#hug-heart", {y: 0}, {y: -70, duration: 2.75, ease: "none"}, 24.75);
+      tl.fromTo("#card-kai", {x: 95, y: 270, scale: 0.92, rotation: 7, opacity: 1}, {x: 55, y: 608, scale: 0.6, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(2.2)"}, 27.5);
+      tl.to("#card-kai", {y: 592, rotation: 3, duration: 0.2, ease: "power1.out"}, 28);
+      tl.to("#card-kai", {y: 608, rotation: 0, duration: 0.3, ease: "power1.in"}, 28.2);
+      tl.to("#card-kai", {y: 592, rotation: -3, duration: 0.2, ease: "power1.out"}, 28.5);
+      tl.to("#card-kai", {y: 608, rotation: 0, duration: 0.3, ease: "power1.in"}, 28.7);
+      tl.to("#card-kai", {y: 592, rotation: 3, duration: 0.2, ease: "power1.out"}, 29);
+      tl.to("#card-kai", {y: 608, rotation: 0, duration: 0.3, ease: "power1.in"}, 29.2);
+      tl.to("#card-kai", {y: 592, rotation: -3, duration: 0.2, ease: "power1.out"}, 29.5);
+      tl.to("#card-kai", {y: 608, rotation: 0, duration: 0.3, ease: "power1.in"}, 29.7);
+      tl.to("#card-kai", {x: 115, duration: 2, ease: "none"}, 28);
+      tl.fromTo("#card-moc", {x: -95, y: -130, scale: 0.92, rotation: -7, opacity: 1}, {x: -155, y: 188, scale: 0.6, rotation: 0, opacity: 1, duration: 0.5, ease: "back.out(2.2)"}, 27.5);
+      tl.to("#card-moc", {y: 172, rotation: -3, duration: 0.2, ease: "power1.out"}, 28);
+      tl.to("#card-moc", {y: 188, rotation: 0, duration: 0.3, ease: "power1.in"}, 28.2);
+      tl.to("#card-moc", {y: 172, rotation: 3, duration: 0.2, ease: "power1.out"}, 28.5);
+      tl.to("#card-moc", {y: 188, rotation: 0, duration: 0.3, ease: "power1.in"}, 28.7);
+      tl.to("#card-moc", {y: 172, rotation: -3, duration: 0.2, ease: "power1.out"}, 29);
+      tl.to("#card-moc", {y: 188, rotation: 0, duration: 0.3, ease: "power1.in"}, 29.2);
+      tl.to("#card-moc", {y: 172, rotation: 3, duration: 0.2, ease: "power1.out"}, 29.5);
+      tl.to("#card-moc", {y: 188, rotation: 0, duration: 0.3, ease: "power1.in"}, 29.7);
+      tl.to("#card-moc", {x: -95, duration: 2, ease: "none"}, 28);
+      tl.fromTo("#walk-handlink", {scale: 0.3}, {scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 27.7);
+      tl.fromTo("#walk-road", {y: 260}, {y: 0, duration: 0.5, ease: "back.out(2.2)"}, 27.5);
+      tl.fromTo("#walk-road-dashes", {x: 0}, {x: -1200, duration: 2.5, ease: "none"}, 27.5);
+      tl.fromTo("#walk-skyline-blocks", {x: 0}, {x: -300, duration: 2.5, ease: "none"}, 27.5);
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;
       tl.seek(0);

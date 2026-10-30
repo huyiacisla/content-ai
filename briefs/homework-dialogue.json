@@ -17,7 +17,8 @@
       "beatSec": 0.5,
       "framesPerBeat": 15,
       "rule": "cắt cảnh/thoại trên nhịp; bắt đầu mỗi 4 nhịp (2s)"
-    }
+    },
+    "interactionsNote": "Nhân vật = ảnh tĩnh ⇒ hoạt cảnh dựng bằng transform (tịnh tiến/nghiêng/nhún theo nhịp) + props (tim, nối tay, đường, skyline)"
   },
   "style": {
     "background": "#FFFFFF",
@@ -325,6 +326,202 @@
           "text": "Mai nộp đúng hạn!",
           "in": "spring-pop",
           "out": "hard-cut"
+        }
+      ],
+      "accent": "heart"
+    }
+  ],
+  "interactions": [
+    {
+      "id": "hold-hands",
+      "type": "hold-hands",
+      "sceneId": "solution",
+      "startSec": 22.0,
+      "endSec": 24.0,
+      "startFrame": 660,
+      "endFrame": 720,
+      "beat": 44,
+      "durationBeats": 4,
+      "in": "damped-spring",
+      "out": "hard-cut",
+      "desc": "Hai bạn bước lại gần, nắm tay chốt kèo",
+      "pose": {
+        "kai": {
+          "cx": 340,
+          "cy": 1000,
+          "scale": 0.9,
+          "rotate": 0,
+          "z": 3
+        },
+        "moc": {
+          "cx": 740,
+          "cy": 1000,
+          "scale": 0.9,
+          "rotate": 0,
+          "z": 3
+        }
+      },
+      "motion": {
+        "approach": {
+          "durationSec": 0.5,
+          "ease": "damped-spring"
+        },
+        "squeeze": {
+          "atBeats": [
+            2
+          ],
+          "scalePulse": 1.04,
+          "note": "beat tương đối từ đầu hoạt cảnh"
+        }
+      },
+      "props": [
+        {
+          "id": "handlink",
+          "kind": "hand-link",
+          "x": 540,
+          "y": 1258,
+          "w": 130,
+          "h": 70,
+          "popAtSec": 22.4
+        }
+      ],
+      "note": "Nhân vật là ảnh tĩnh ⇒ 'nắm tay' = hai thẻ chạm nhau + biểu tượng nối tay"
+    },
+    {
+      "id": "hug",
+      "type": "hug",
+      "sceneId": "cta",
+      "startSec": 24.0,
+      "endSec": 27.5,
+      "startFrame": 720,
+      "endFrame": 825,
+      "beat": 48,
+      "durationBeats": 7,
+      "in": "damped-spring",
+      "out": "hard-cut",
+      "desc": "Hai bạn ôm nhau: nghiêng vào nhau, thẻ chồng nhẹ, nhún theo nhịp",
+      "pose": {
+        "kai": {
+          "cx": 380,
+          "cy": 1010,
+          "scale": 0.92,
+          "rotate": 7,
+          "z": 4
+        },
+        "moc": {
+          "cx": 700,
+          "cy": 1030,
+          "scale": 0.92,
+          "rotate": -7,
+          "z": 3
+        }
+      },
+      "motion": {
+        "approach": {
+          "durationSec": 0.6,
+          "ease": "damped-spring"
+        },
+        "squeeze": {
+          "everyBeat": true,
+          "fromSec": 24.75,
+          "scalePulse": 1.04
+        }
+      },
+      "bubbles": {
+        "kai": {
+          "x": 50,
+          "y": 1500
+        },
+        "moc": {
+          "x": 550,
+          "y": 1500
+        }
+      },
+      "props": [
+        {
+          "id": "heart",
+          "kind": "heart",
+          "x": 540,
+          "y": 690,
+          "size": 120,
+          "popAtSec": 24.75,
+          "floatPx": -70,
+          "color": "accent"
+        }
+      ]
+    },
+    {
+      "id": "walk",
+      "type": "walk",
+      "sceneId": "cta",
+      "startSec": 27.5,
+      "endSec": 30.0,
+      "startFrame": 825,
+      "endFrame": 900,
+      "beat": 55,
+      "durationBeats": 5,
+      "in": "damped-spring",
+      "out": "hard-cut",
+      "desc": "Hai bạn nắm tay cùng đi trên đường; đường và nền trôi qua (parallax)",
+      "pose": {
+        "kai": {
+          "cx": 340,
+          "cy": 1348,
+          "scale": 0.6,
+          "rotate": 0,
+          "z": 3
+        },
+        "moc": {
+          "cx": 640,
+          "cy": 1348,
+          "scale": 0.6,
+          "rotate": 0,
+          "z": 3
+        }
+      },
+      "motion": {
+        "approach": {
+          "durationSec": 0.5,
+          "ease": "damped-spring"
+        },
+        "step": {
+          "everyBeat": true,
+          "bobPx": 16,
+          "swayDeg": 3,
+          "alternateSign": true
+        },
+        "driftPx": 60
+      },
+      "props": [
+        {
+          "id": "handlink",
+          "kind": "hand-link",
+          "x": 490,
+          "y": 1524,
+          "w": 90,
+          "h": 50,
+          "popAtSec": 27.7
+        },
+        {
+          "id": "road",
+          "kind": "road",
+          "y": 1560,
+          "h": 260,
+          "color": "ink",
+          "dashes": {
+            "w": 120,
+            "gap": 120,
+            "h": 14,
+            "color": "bg",
+            "scrollPxPerSec": 480
+          }
+        },
+        {
+          "id": "skyline",
+          "kind": "skyline",
+          "y": 1180,
+          "color": "babybeat-tint",
+          "scrollPxPerSec": 120
         }
       ]
     }
