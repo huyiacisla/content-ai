@@ -1,0 +1,332 @@
+{
+  "meta": {
+    "title": "Hai bạn bàn bài tập nộp sáng mai",
+    "lang": "vi",
+    "role": "senior motion designer",
+    "engine": "hyperframes",
+    "format": {
+      "durationSec": 30,
+      "aspect": "9:16",
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "totalFrames": 900
+    },
+    "beat": {
+      "bpm": 120,
+      "beatSec": 0.5,
+      "framesPerBeat": 15,
+      "rule": "cắt cảnh/thoại trên nhịp; bắt đầu mỗi 4 nhịp (2s)"
+    }
+  },
+  "style": {
+    "background": "#FFFFFF",
+    "palette": {
+      "bg": "#FFFFFF",
+      "ink": "#1B2A41",
+      "babybeat": "#7EC8F0",
+      "accent": "#FF7A45"
+    },
+    "accentRule": "1 điểm nhấn: #FF7A45 chỉ cho 1 yếu tố nổi bật mỗi cảnh",
+    "type": {
+      "family": "Quicksand",
+      "weight": 700,
+      "maxWordsPerText": 6
+    },
+    "motion": {
+      "easing": "damped-spring",
+      "spring": {
+        "stiffness": 180,
+        "damping": 18,
+        "mass": 1
+      },
+      "cut": "on-beat"
+    },
+    "doNot": [
+      "fade mặc định",
+      "glow"
+    ]
+  },
+  "characters": {
+    "kai": {
+      "name": "Kai",
+      "ref": "image1",
+      "look": "tóc nâu dựng gai, áo len sọc xanh-kem-cam, chồn gấu trúc trên vai",
+      "bg": "nền xanh nhạt",
+      "side": "left",
+      "voice": {
+        "tone": "nhanh, tươi",
+        "pitch": "cao vừa"
+      },
+      "accent": "#7EC8F0"
+    },
+    "moc": {
+      "name": "Mộc",
+      "ref": "image2",
+      "look": "tóc nâu xoăn bồng, áo khoác len xám, quần short xanh rêu, giày da nâu",
+      "side": "right",
+      "voice": {
+        "tone": "chậm, hơi lo",
+        "pitch": "thấp vừa"
+      },
+      "accent": "#FF7A45"
+    }
+  },
+  "audio": {
+    "music": {
+      "bpm": 120,
+      "mood": "nhẹ, tích cực, lo-fi pop",
+      "file": "assets/music-120bpm.mp3",
+      "volumeDb": -14,
+      "duckUnderVoiceDb": -6
+    },
+    "sfx": [
+      {
+        "on": "lineIn",
+        "file": "assets/ui-pop.wav",
+        "volumeDb": -20
+      },
+      {
+        "on": "sceneCut",
+        "file": "assets/ui-tick.wav",
+        "volumeDb": -18
+      }
+    ],
+    "voice": {
+      "tts": "edge-tts",
+      "kai": "vi-VN-NamMinhNeural",
+      "moc": "vi-VN-HoaiMyNeural",
+      "note": "đổi giọng tuỳ ý; chưa sinh file"
+    }
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "label": "Hook",
+      "startSec": 0,
+      "endSec": 6,
+      "startFrame": 0,
+      "endFrame": 180,
+      "title": {
+        "text": "Mai nộp bài rồi!",
+        "startFrame": 0,
+        "endFrame": 30,
+        "in": "spring-scale",
+        "out": "hard-cut"
+      },
+      "layout": "2 nhân vật đứng trái/phải, bong bóng thoại trên đầu người nói, nhân vật còn lại lùi 4% + giảm độ sáng",
+      "lines": [
+        {
+          "id": "l1",
+          "char": "kai",
+          "startSec": 1.0,
+          "endSec": 2.5,
+          "startFrame": 30,
+          "endFrame": 75,
+          "beat": 2,
+          "text": "Mộc! Bài mai nộp chưa?",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l2",
+          "char": "moc",
+          "startSec": 3.0,
+          "endSec": 4.5,
+          "startFrame": 90,
+          "endFrame": 135,
+          "beat": 6,
+          "text": "Hả? Bài nào cơ?",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l3",
+          "char": "kai",
+          "startSec": 5.0,
+          "endSec": 6.0,
+          "startFrame": 150,
+          "endFrame": 180,
+          "beat": 10,
+          "text": "Bài thuyết trình đó!",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "label": "Vấn đề",
+      "startSec": 6,
+      "endSec": 14,
+      "startFrame": 180,
+      "endFrame": 420,
+      "title": {
+        "text": "Còn vài tiếng thôi",
+        "startFrame": 180,
+        "endFrame": 210,
+        "in": "spring-slide-up",
+        "out": "hard-cut"
+      },
+      "layout": "2 nhân vật đứng trái/phải, bong bóng thoại trên đầu người nói, nhân vật còn lại lùi 4% + giảm độ sáng",
+      "lines": [
+        {
+          "id": "l4",
+          "char": "moc",
+          "startSec": 6.0,
+          "endSec": 7.5,
+          "startFrame": 180,
+          "endFrame": 225,
+          "beat": 12,
+          "text": "Quên mất! Mới làm nửa.",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l5",
+          "char": "kai",
+          "startSec": 8.0,
+          "endSec": 9.5,
+          "startFrame": 240,
+          "endFrame": 285,
+          "beat": 16,
+          "text": "Còn mấy tiếng thôi!",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l6",
+          "char": "moc",
+          "startSec": 10.0,
+          "endSec": 11.5,
+          "startFrame": 300,
+          "endFrame": 345,
+          "beat": 20,
+          "text": "Tối nay thức trắng à?",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l7",
+          "char": "kai",
+          "startSec": 12.0,
+          "endSec": 14.0,
+          "startFrame": 360,
+          "endFrame": 420,
+          "beat": 24,
+          "text": "Chia việc đi, nhanh hơn!",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        }
+      ]
+    },
+    {
+      "id": "solution",
+      "label": "Giải pháp",
+      "startSec": 14,
+      "endSec": 24,
+      "startFrame": 420,
+      "endFrame": 720,
+      "title": {
+        "text": "Chia 3 việc",
+        "startFrame": 420,
+        "endFrame": 450,
+        "in": "spring-slide-up",
+        "out": "hard-cut"
+      },
+      "layout": "2 nhân vật đứng trái/phải, bong bóng thoại trên đầu người nói, nhân vật còn lại lùi 4% + giảm độ sáng",
+      "lines": [
+        {
+          "id": "l8",
+          "char": "kai",
+          "startSec": 14.0,
+          "endSec": 15.5,
+          "startFrame": 420,
+          "endFrame": 465,
+          "beat": 28,
+          "text": "Mình làm slide.",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l9",
+          "char": "moc",
+          "startSec": 16.0,
+          "endSec": 17.5,
+          "startFrame": 480,
+          "endFrame": 525,
+          "beat": 32,
+          "text": "Tớ viết nội dung.",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l10",
+          "char": "kai",
+          "startSec": 18.0,
+          "endSec": 19.5,
+          "startFrame": 540,
+          "endFrame": 585,
+          "beat": 36,
+          "text": "Chín giờ xong, ngủ sớm.",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l11",
+          "char": "moc",
+          "startSec": 20.0,
+          "endSec": 21.5,
+          "startFrame": 600,
+          "endFrame": 645,
+          "beat": 40,
+          "text": "Chốt! Lập checklist nhé.",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "label": "CTA",
+      "startSec": 24,
+      "endSec": 30,
+      "startFrame": 720,
+      "endFrame": 900,
+      "title": {
+        "text": "Làm ngay hôm nay",
+        "startFrame": 720,
+        "endFrame": 750,
+        "in": "spring-slide-up",
+        "out": "hard-cut"
+      },
+      "layout": "2 nhân vật đứng trái/phải, bong bóng thoại trên đầu người nói, nhân vật còn lại lùi 4% + giảm độ sáng",
+      "lines": [
+        {
+          "id": "l12",
+          "char": "kai",
+          "startSec": 24.0,
+          "endSec": 25.5,
+          "startFrame": 720,
+          "endFrame": 765,
+          "beat": 48,
+          "text": "Bắt đầu ngay nào!",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        },
+        {
+          "id": "l13",
+          "char": "moc",
+          "startSec": 26.0,
+          "endSec": 27.5,
+          "startFrame": 780,
+          "endFrame": 825,
+          "beat": 52,
+          "text": "Mai nộp đúng hạn!",
+          "in": "spring-pop",
+          "out": "hard-cut"
+        }
+      ]
+    }
+  ]
+}
