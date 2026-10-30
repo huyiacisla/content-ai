@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="vi" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-vietnamese-700-normal.woff2") format("woff2"); unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB; }
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-latin-ext-700-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+      :root {
+        --ground: #FFFFFF;
+        --ink: #1B2A41;
+        --blue: #7EC8F0;
+        --accent: #FF7A45;
+        --font-display: "Quicksand", sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font-display); font-weight: 700; color: var(--ink); }
+      #stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 1; }
+      .scene { position: absolute; inset: 0; z-index: 4; }
+      .chip { position: absolute; left: 50px; top: 90px; padding: 14px 30px; border-radius: 40px; background: var(--blue); font-size: 40px; }
+      .title { position: absolute; left: 50px; top: 170px; width: 980px; font-size: 104px; line-height: 1.1; }
+      .bar.ink { background: var(--ink); }
+      .bar { position: absolute; left: 50px; top: 300px; width: 260px; height: 16px; border-radius: 8px; background: var(--accent); transform-origin: left center; }
+      .heart { position: absolute; z-index: 6; }
+      .bubble { z-index: 5; position: absolute; width: 480px; padding: 36px 40px; border-radius: 48px; background: var(--blue); font-size: 62px; line-height: 1.2; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1080" data-height="1920">
+      <canvas id="stage" class="clip" width="1080" height="1920" data-start="0" data-duration="30" data-track-index="0"></canvas>
+      <div id="scene-hook" class="clip scene" data-start="0" data-duration="6" data-track-index="1">
+        <div class="chip" id="chip-hook">01 · Hook</div>
+        <div class="title" id="title-hook">Mai nộp bài rồi!</div>
+        <div class="bar" id="bar-hook"></div>
+      </div>
+      <div id="scene-problem" class="clip scene" data-start="6" data-duration="8" data-track-index="1">
+        <div class="chip" id="chip-problem">02 · Vấn đề</div>
+        <div class="title" id="title-problem">Còn vài tiếng thôi</div>
+        <div class="bar" id="bar-problem"></div>
+      </div>
+      <div id="scene-solution" class="clip scene" data-start="14" data-duration="10" data-track-index="1">
+        <div class="chip" id="chip-solution">03 · Giải pháp</div>
+        <div class="title" id="title-solution">Chia 3 việc</div>
+        <div class="bar" id="bar-solution"></div>
+      </div>
+      <div id="scene-cta" class="clip scene" data-start="24" data-duration="6" data-track-index="1">
+        <div class="chip" id="chip-cta">04 · CTA</div>
+        <div class="title" id="title-cta">Làm ngay hôm nay</div>
+        <div class="bar ink" id="bar-cta"></div>
+      </div>
+      <div class="clip heart" id="heart" data-start="24.75" data-duration="2.75" data-track-index="3" style="left:480px;top:620px;width:120px;height:120px">
+        <svg viewBox="0 0 24 24" width="120" height="120"><path fill="var(--accent)" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.5c2 0 3.5 1 5.4 3 1.9-2 3.4-3 5.4-3 3.7 0 5.7 3.9 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>
+      </div>
+      <div class="clip bubble kai" id="l1" data-start="1" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:420px">Mộc! Bài mai nộp chưa?</div>
+      <div class="clip bubble moc" id="l2" data-start="3" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:420px">Hả? Bài nào cơ?</div>
+      <div class="clip bubble kai" id="l3" data-start="4.5" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:420px">Bài thuyết trình đó!</div>
+      <div class="clip bubble moc" id="l4" data-start="6" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:420px">Quên mất! Mới làm nửa.</div>
+      <div class="clip bubble kai" id="l5" data-start="8" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:420px">Còn mấy tiếng thôi!</div>
+      <div class="clip bubble moc" id="l6" data-start="10" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:420px">Tối nay thức trắng à?</div>
+      <div class="clip bubble kai" id="l7" data-start="12" data-duration="2" data-track-index="2"
+        style="left:50px;top:420px">Chia việc đi, nhanh hơn!</div>
+      <div class="clip bubble kai" id="l8" data-start="14" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:420px">Mình làm slide.</div>
+      <div class="clip bubble moc" id="l9" data-start="16" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:420px">Tớ viết nội dung.</div>
+      <div class="clip bubble kai" id="l10" data-start="18" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:420px">Chín giờ xong, ngủ sớm.</div>
+      <div class="clip bubble moc" id="l11" data-start="20" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:420px">Chốt! Lập checklist nhé.</div>
+      <div class="clip bubble kai" id="l12" data-start="24" data-duration="1.5" data-track-index="2"
+        style="left:50px;top:420px">Bắt đầu ngay nào!</div>
+      <div class="clip bubble moc" id="l13" data-start="26" data-duration="1.5" data-track-index="2"
+        style="left:550px;top:420px">Mai nộp đúng hạn!</div>
+      <audio id="music" src="assets/music-120bpm.mp3" data-start="0" data-duration="30" data-volume="0.5"></audio>
+    </div>
+    <script>window.__STAGE = {"stage3d":{"engine":"three.js","version":"0.186.1","style":"toon-cartoon","render":{"canvas":[1080,1920],"transparentBg":true,"toon":{"gradientSteps":3,"outlineColor":"ink","outlineScale":1.05},"lights":{"ambient":1,"sun":{"intensity":1.6,"pos":[3,6,5]}}},"characters":{"kai":{"ref":"image1","skin":"#F4C4A8","hair":{"type":"spiky","color":"#C9965A","spikes":9},"eyes":"#5BB8D8","top":{"type":"striped-sweater","bands":["#6FA3BF","#EADFC8","#B8532B","#6FA3BF"]},"pants":"#8B6B4A","shoes":"#6B4A32","pet":"raccoon-on-shoulder"},"moc":{"ref":"image2","skin":"#E9B697","hair":{"type":"curly","color":"#6B4A32","curls":46},"eyes":"#7A5232","top":{"type":"cardigan","color":"#5E6B5C","inner":"#B8732B"},"pants":"#6E7545","shoes":"#B8732B","pet":null}},"cameraRule":"cắt cứng theo nhịp; không dolly mượt","shots":[{"id":"s1","startSec":0,"pos":[0,4,16],"look":[0,3.7,0],"fov":38},{"id":"s2","startSec":6,"pos":[0,3.8,14],"look":[0,3.5,0],"fov":38},{"id":"s3","startSec":14,"pos":[0,4,15.5],"look":[0,3.7,0],"fov":38},{"id":"s4","startSec":22,"pos":[0,3.7,13],"look":[0,3.4,0],"fov":38},{"id":"s5","startSec":24,"pos":[0,3.8,12.5],"look":[0,3.5,0],"fov":38},{"id":"s6","startSec":27.5,"pos":[-4.2,3.6,14],"look":[0,3.3,0],"fov":38}],"poses":{"stand":{"kai":{"x":-1.25,"z":0,"rotY":0.35,"tilt":-0.05},"moc":{"x":1.25,"z":0,"rotY":-0.35,"tilt":0.05}},"hold-hands":{"kai":{"x":-0.85,"z":0,"rotY":0.55,"tilt":-0.08,"hands":{"L":[0,1.35,0.25]}},"moc":{"x":0.85,"z":0,"rotY":-0.55,"tilt":0.08,"hands":{"R":[0,1.35,0.25]}}},"hug":{"kai":{"x":-0.6,"z":0,"rotY":0.6,"tilt":-0.28,"hands":{"L":[1.15,1.8,-0.3],"R":[0.3,1.4,0.55]}},"moc":{"x":0.6,"z":0,"rotY":-0.6,"tilt":0.28,"hands":{"R":[-1.15,1.8,-0.3],"L":[-0.3,1.4,0.55]}}},"walk":{"kai":{"x":-0.78,"z":0.54,"rotY":0.6,"tilt":0,"hands":{"L":[0,1.3,0]}},"moc":{"x":0.78,"z":-0.54,"rotY":0.6,"tilt":0,"hands":{"R":[0,1.3,0]}}}},"motion":{"talk":{"mouthHz":8,"nodRad":0.06,"popSpring":{"k":8,"hz":20,"amp":0.05}},"idle":{"breathAmp":0.02,"blinkEverySec":3.2,"blinkSec":0.12},"walk":{"cycleSec":1,"legSwingRad":0.6,"bobUnits":0.08,"roadSpeed":4,"skylineParallax":0.4},"hug":{"squeezeFromSec":24.75,"squeezeAmp":0.05},"hold-hands":{"squeezeAtSec":23}},"environment":{"floor":"soft shadow disc","road":{"fromSec":27.5,"color":"ink","dashColor":"bg"},"skyline":{"fromSec":27.5,"colors":["#D6EEFB","#BFE3F7"]}},"overlay2d":{"note":"chip/title/bubble giữ bằng HTML, bubble đặt vùng trên (y≈420) để không che nhân vật","bubbles":{"kai":{"x":50,"y":420},"moc":{"x":550,"y":420}}}},"lines":[{"char":"kai","startSec":1,"endSec":2.5},{"char":"moc","startSec":3,"endSec":4.5},{"char":"kai","startSec":4.5,"endSec":6},{"char":"moc","startSec":6,"endSec":7.5},{"char":"kai","startSec":8,"endSec":9.5},{"char":"moc","startSec":10,"endSec":11.5},{"char":"kai","startSec":12,"endSec":14},{"char":"kai","startSec":14,"endSec":15.5},{"char":"moc","startSec":16,"endSec":17.5},{"char":"kai","startSec":18,"endSec":19.5},{"char":"moc","startSec":20,"endSec":21.5},{"char":"kai","startSec":24,"endSec":25.5},{"char":"moc","startSec":26,"endSec":27.5}],"interactions":[{"type":"hold-hands","startSec":22,"endSec":24,"approach":0.5},{"type":"hug","startSec":24,"endSec":27.5,"approach":0.6},{"type":"walk","startSec":27.5,"endSec":30,"approach":0.5}]};</script>
+    <script type="module" src="assets/stage3d.js"></script>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#chip-hook", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 0);
+      tl.fromTo("#title-hook", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 0);
+      tl.fromTo("#bar-hook", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 0.1);
+      tl.fromTo("#chip-problem", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 6);
+      tl.fromTo("#title-problem", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 6);
+      tl.fromTo("#bar-problem", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 6.1);
+      tl.fromTo("#chip-solution", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 14);
+      tl.fromTo("#title-solution", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 14);
+      tl.fromTo("#bar-solution", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 14.1);
+      tl.fromTo("#chip-cta", {y: -40, scale: 0.7}, {y: 0, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 24);
+      tl.fromTo("#title-cta", {y: 80, scale: 0.8}, {y: 0, scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 24);
+      tl.fromTo("#bar-cta", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "back.out(2.2)"}, 24.1);
+      tl.fromTo("#l1", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 1);
+      tl.fromTo("#l2", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 3);
+      tl.fromTo("#l3", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 4.5);
+      tl.fromTo("#l4", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 6);
+      tl.fromTo("#l5", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 8);
+      tl.fromTo("#l6", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 10);
+      tl.fromTo("#l7", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 12);
+      tl.fromTo("#l8", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 14);
+      tl.fromTo("#l9", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 16);
+      tl.fromTo("#l10", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 18);
+      tl.fromTo("#l11", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 20);
+      tl.fromTo("#l12", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 24);
+      tl.fromTo("#l13", {scale: 0.6, y: 30}, {scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)"}, 26);
+      tl.fromTo("#heart", {scale: 0}, {scale: 1, duration: 0.5, ease: "back.out(2.2)"}, 24.75);
+      tl.fromTo("#heart", {y: 0}, {y: -70, duration: 2.75, ease: "none"}, 24.75);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
