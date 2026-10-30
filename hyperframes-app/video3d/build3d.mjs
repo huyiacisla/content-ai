@@ -13,7 +13,12 @@ const lines = brief.scenes.flatMap((s) => s.lines);
 const interactions = (brief.interactions || []).map((i) => ({
   type: i.type, startSec: i.startSec, endSec: i.endSec, approach: i.motion.approach.durationSec,
 }));
+const useSprites = !process.argv.includes('--model'); // mặc định: nhân vật = ảnh 2D; --model = model 3D tự dựng
 const stage = {
+  sprites: useSprites ? {
+    kai: {src: './assets/kai-cut.png', height: 4.6, fadeBottom: 0.1, shadow: false},
+    moc: {src: './assets/moc-cut.png', height: 4.3, shadow: true},
+  } : null,
   stage3d: brief.stage3d,
   lines: lines.map((l) => ({char: l.char, startSec: l.startSec, endSec: l.endSec})),
   interactions,

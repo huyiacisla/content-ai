@@ -193,6 +193,46 @@ const chars = {
   moc: makeChar({skin: C.moc.skin, hair: {...C.moc.hair}, eyes: C.moc.eyes, top: C.moc.top, sleeve: C.moc.top.color, pants: {leg: C.moc.skin, color: C.moc.pants, short: true}, shoes: C.moc.shoes, pet: false}),
 };
 
+// chế độ sprite: nhân vật = ảnh 2D cutout đặt trong sân khấu 3D (S.sprites)
+const SP = S.sprites;
+const sprites = {};
+if (SP) {
+  const loadImg = (src) => new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; });
+  for (const who of ['kai', 'moc']) {
+    const c = SP[who];
+    const im = await loadImg(c.src);
+    const cv = document.createElement('canvas');
+    cv.width = im.width; cv.height = im.height;
+    const g = cv.getContext('2d');
+    g.drawImage(im, 0, 0);
+    if (c.fadeBottom) { // ảnh cắt ngang đùi ⇒ mờ dần phần đáy thay vì cắt cứng
+      const h = im.height * c.fadeBottom;
+      const gr = g.createLinearGradient(0, im.height - h, 0, im.height);
+      gr.addColorStop(0, 'rgba(0,0,0,0)'); gr.addColorStop(1, 'rgba(0,0,0,1)');
+      g.globalCompositeOperation = 'destination-out';
+      g.fillStyle = gr; g.fillRect(0, im.height - h, im.width, h);
+    }
+    const tex = new THREE.CanvasTexture(cv);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = 4;
+    const w = c.height * im.width / im.height;
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, c.height), new THREE.MeshBasicMaterial({map: tex, transparent: true, alphaTest: 0.02}));
+    mesh.position.y = c.height / 2;
+    const root = new THREE.Group();
+    const lean = new THREE.Group(); // trục nghiêng đặt ở chân
+    lean.add(mesh);
+    root.add(lean);
+    if (c.shadow) {
+      const sh = new THREE.Mesh(new THREE.CircleGeometry(0.9, 32), new THREE.MeshBasicMaterial({color: 0x1b2a41, transparent: true, opacity: 0.12}));
+      sh.rotation.x = -Math.PI / 2; sh.position.y = 0.01; sh.scale.set(1.2, 0.5, 1);
+      root.add(sh);
+    }
+    scene.add(root);
+    sprites[who] = {root, mesh: lean, c};
+    if (chars[who]) chars[who].root.visible = false;
+  }
+}
+
 // môi trường đi bộ: đường + vạch + skyline
 const env = new THREE.Group();
 const walkAngle = cfg.poses.walk.kai.rotY;
@@ -336,6 +376,27 @@ function updateChar(who, t) {
   });
 }
 
+function updateSprite(who, t) {
+  const {root, mesh, c} = sprites[who];
+  const {st, p, it} = poseAt(t, who);
+  const isWalk = it && it.type === 'walk';
+  const walkT = isWalk ? t - it.startSec : 0;
+  const walkAmt = isWalk ? clamp(p, 0, 1) : 0;
+  const phase = (walkT / M.walk.cycleSec) * Math.PI * 2;
+  const line = lines.find((l) => l.char === who && t >= l.startSec && t < l.endSec);
+  const u = line ? t - line.startSec : 99;
+  const pop = line ? Math.exp(-M.talk.popSpring.k * u) * Math.cos(M.talk.popSpring.hz * u) * M.talk.popSpring.amp : 0;
+  const bob = isWalk ? Math.abs(Math.sin(phase)) * M.walk.bobUnits * walkAmt : 0;
+  const breath = Math.sin(t * 2 + (who === 'kai' ? 0 : 1.3)) * M.idle.breathAmp;
+  root.position.set(st.x, bob, st.z + (who === 'kai' ? 0.05 : 0));
+  root.rotation.y = st.rotY * 0.5; // xoay nhẹ ⇒ còn parallax 3D, ¬ lật mỏng
+  mesh.rotation.z = -st.tilt * 0.6 + (isWalk ? Math.sin(phase) * 0.05 * walkAmt : 0);
+  let squeeze = 0;
+  if (it && it.type === 'hug' && t >= M.hug.squeezeFromSec) squeeze = Math.exp(-((t - M.hug.squeezeFromSec) % 0.5) * 10) * M.hug.squeezeAmp;
+  if (it && it.type === 'hold-hands' && t >= M['hold-hands'].squeezeAtSec) squeeze = Math.exp(-(t - M['hold-hands'].squeezeAtSec) * 10) * 0.04;
+  root.scale.set(1 + pop * 0.5 + squeeze, 1 + pop + breath - squeeze * 0.5, 1);
+}
+
 function updateEnv(t) {
   const f = cfg.environment;
   const on = t >= f.road.fromSec;
@@ -359,8 +420,7 @@ function updateCamera(t) {
 }
 
 function draw(t) {
-  updateChar('kai', t);
-  updateChar('moc', t);
+  if (SP) { updateSprite('kai', t); updateSprite('moc', t); } else { updateChar('kai', t); updateChar('moc', t); }
   updateEnv(t);
   updateCamera(t);
   renderer.render(scene, camera);
