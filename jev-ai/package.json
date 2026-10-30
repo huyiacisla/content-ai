@@ -1,0 +1,12 @@
+{
+  "name": "jev-ai",
+  "version": "1.0.0",
+  "description": "Client for the Jev AI decision API (https://jev-ai.pro/docs)",
+  "type": "module",
+  "main": "src/client.mjs",
+  "scripts": {
+    "check": "node --check src/client.mjs && node --check src/cli.mjs && node --test test/*.test.mjs",
+    "decide": "node src/cli.mjs"
+  },
+  "license": "ISC"
+}
