@@ -2669,16 +2669,16 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2285714285714286,
-    "height": 0.5,
-    "depth": 0.2285714285714286,
+    "width": 0.28571428571428575,
+    "height": 0.35714285714285715,
+    "depth": 0.28571428571428575,
     "units": "relative",
     "confidence": 0.7
    },
    "transform": {
     "position": [
-     -0.33,
-     0.55,
+     -0.45,
+     0.72,
      0.0
     ],
     "rotation": [
@@ -2810,16 +2810,16 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.5,
-    "height": 0.3,
-    "depth": 0.85,
+    "width": 0.95,
+    "height": 0.5,
+    "depth": 0.75,
     "units": "relative",
     "confidence": 0.7
    },
    "transform": {
     "position": [
-     -0.52,
-     0.18,
+     -0.62,
+     0.24,
      0.12
     ],
     "rotation": [
@@ -2959,8 +2959,8 @@
    },
    "transform": {
     "position": [
-     -0.23,
-     0.12,
+     -0.13,
+     0.06,
      0.1
     ],
     "rotation": [
@@ -3521,16 +3521,16 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2285714285714286,
-    "height": 0.5,
-    "depth": 0.2285714285714286,
+    "width": 0.28571428571428575,
+    "height": 0.35714285714285715,
+    "depth": 0.28571428571428575,
     "units": "relative",
     "confidence": 0.7
    },
    "transform": {
     "position": [
-     0.33,
-     0.55,
+     0.45,
+     0.72,
      0.0
     ],
     "rotation": [
@@ -3662,16 +3662,16 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.5,
-    "height": 0.3,
-    "depth": 0.85,
+    "width": 0.95,
+    "height": 0.5,
+    "depth": 0.75,
     "units": "relative",
     "confidence": 0.7
    },
    "transform": {
     "position": [
-     0.52,
-     0.18,
+     0.62,
+     0.24,
      0.12
     ],
     "rotation": [
@@ -3811,8 +3811,8 @@
    },
    "transform": {
     "position": [
-     0.23,
-     0.12,
+     0.13,
+     0.06,
      0.1
     ],
     "rotation": [
@@ -8914,9 +8914,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.24285714285714288,
+    "width": 0.4285714285714286,
     "height": 0.8836060739252256,
-    "depth": 0.24285714285714288,
+    "depth": 0.4285714285714286,
     "units": "relative",
     "confidence": 0.7
    },
@@ -9055,9 +9055,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2,
-    "height": 0.2,
-    "depth": 0.14,
+    "width": 0.38,
+    "height": 0.38,
+    "depth": 0.2,
     "units": "relative",
     "confidence": 0.7
    },
@@ -9337,9 +9337,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.24285714285714288,
+    "width": 0.4285714285714286,
     "height": 0.6927426267660852,
-    "depth": 0.24285714285714288,
+    "depth": 0.4285714285714286,
     "units": "relative",
     "confidence": 0.7
    },
@@ -9478,9 +9478,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2,
-    "height": 0.2,
-    "depth": 0.14,
+    "width": 0.38,
+    "height": 0.38,
+    "depth": 0.2,
     "units": "relative",
     "confidence": 0.7
    },
@@ -9760,9 +9760,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.24285714285714288,
+    "width": 0.4285714285714286,
     "height": 0.7769498184620185,
-    "depth": 0.24285714285714288,
+    "depth": 0.4285714285714286,
     "units": "relative",
     "confidence": 0.7
    },
@@ -9901,9 +9901,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2,
-    "height": 0.2,
-    "depth": 0.14,
+    "width": 0.38,
+    "height": 0.38,
+    "depth": 0.2,
     "units": "relative",
     "confidence": 0.7
    },
@@ -10183,9 +10183,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.24285714285714288,
+    "width": 0.4285714285714286,
     "height": 0.8836060739252256,
-    "depth": 0.24285714285714288,
+    "depth": 0.4285714285714286,
     "units": "relative",
     "confidence": 0.7
    },
@@ -10324,9 +10324,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2,
-    "height": 0.2,
-    "depth": 0.14,
+    "width": 0.38,
+    "height": 0.38,
+    "depth": 0.2,
     "units": "relative",
     "confidence": 0.7
    },
@@ -10606,9 +10606,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.24285714285714288,
+    "width": 0.4285714285714286,
     "height": 0.6927426267660852,
-    "depth": 0.24285714285714288,
+    "depth": 0.4285714285714286,
     "units": "relative",
     "confidence": 0.7
    },
@@ -10747,9 +10747,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2,
-    "height": 0.2,
-    "depth": 0.14,
+    "width": 0.38,
+    "height": 0.38,
+    "depth": 0.2,
     "units": "relative",
     "confidence": 0.7
    },
@@ -11029,9 +11029,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.24285714285714288,
+    "width": 0.4285714285714286,
     "height": 0.7769498184620185,
-    "depth": 0.24285714285714288,
+    "depth": 0.4285714285714286,
     "units": "relative",
     "confidence": 0.7
    },
@@ -11170,9 +11170,9 @@
     "gapTolerance": 0.02
    },
    "dimensions": {
-    "width": 0.2,
-    "height": 0.2,
-    "depth": 0.14,
+    "width": 0.38,
+    "height": 0.38,
+    "depth": 0.2,
     "units": "relative",
     "confidence": 0.7
    },
@@ -11433,9 +11433,9 @@
     "uvStrategy": "generated procedural coordinates",
     "normalStrategy": "vertex normals from generated geometry"
    },
-   "parent": "hand-low-L",
+   "parent": "hand-low-R",
    "attachment": {
-    "parentSocket": "hand-low-L-socket",
+    "parentSocket": "hand-low-R-socket",
     "contactType": "overlap",
     "localStart": [
      0,
@@ -11460,7 +11460,7 @@
    },
    "transform": {
     "position": [
-     -3.013,
+     -0.267,
      0.384,
      0.05
     ],
@@ -11580,9 +11580,9 @@
     "uvStrategy": "generated procedural coordinates",
     "normalStrategy": "vertex normals from generated geometry"
    },
-   "parent": "hand-low-R",
+   "parent": "hand-low-L",
    "attachment": {
-    "parentSocket": "hand-low-R-socket",
+    "parentSocket": "hand-low-L-socket",
     "contactType": "overlap",
     "localStart": [
      0,
@@ -11607,7 +11607,7 @@
    },
    "transform": {
     "position": [
-     3.0,
+     0.254,
      0.217,
      0.05
     ],

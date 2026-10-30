@@ -71,8 +71,8 @@ for sx,n in ((-1,'R'),(1,'L')):
     add(f'xbutton-{n}','X button '+n,'micro','cylinder','bloomers',[sx*0.18,1.78,0.43],[0.14,0.03,0.14],'cloth-orange',rot=(math.pi/2,0,0))
     add(f'diamond-{n}','Diamond print '+n,'micro','box','bloomers',[sx*0.35,1.0,0.48],[0.3,0.3,0.03],'cloth-orange',rot=(0,0,math.pi/4))
     # legs / stockings / shoes
-    add(f'leg-{n}',f'Stocking {n}','meso','capsule','root',[sx*0.33,0.55,0.0],[0.16,0.7,0.16],'cloth-purple',role='leg')
-    add(f'shoe-{n}',f'Curled shoe {n}','macro','ellipsoid','root',[sx*0.52,0.18,0.12],[0.5,0.3,0.85],'shoe-satin',role='foot')
+    add(f'leg-{n}',f'Stocking {n}','meso','capsule','root',[sx*0.45,0.72,0.0],[0.2,0.5,0.2],'cloth-purple',role='leg')
+    add(f'shoe-{n}',f'Curled shoe {n}','macro','ellipsoid','root',[sx*0.62,0.24,0.12],[0.95,0.5,0.75],'shoe-satin',role='foot')
     add(f'shoe-toe-{n}',f'Shoe toe curl {n}','meso','cone','shoe-'+n,[sx*0.75,0.3,0.22],[0.2,0.55,0.2],'cloth-orange',rot=(0,0,-sx*math.pi/2.8))
     add(f'shoe-bell-{n}',f'Shoe bell {n}','micro','sphere',f'shoe-toe-{n}',[sx*0.98,0.42,0.22],[0.12,0.12,0.12],'gold-metal')
 # heads: (id, name, centre px, size w,h,d, hat kind)
@@ -101,12 +101,12 @@ for sx,n in ((-1,'R'),(1,'L')):
         sp = (627 + sx*(627-sp[0]), sp[1]); hp_ = (627 + sx*(627-hp[0]), hp[1])
         a = U(*sp); b = U(*hp_)
         dx,dy = b[0]-a[0], b[1]-a[1]; L = math.hypot(dx,dy)
-        add(f'arm-{t}-{n}',f'Arm {t} {n}','meso','capsule','torso',[round((a[0]+b[0])/2,3),round((a[1]+b[1])/2,3),0.0],[0.17,L,0.17],'fur-black',rot=(0,0,round(math.atan2(-dx,dy),3)),role='arm')
-        add(f'hand-{t}-{n}',f'Hand {t} {n}','meso','sphere',f'arm-{t}-{n}',[b[0],b[1],0.0],[0.2,0.2,0.14],'fur-black',role='hand')
+        add(f'arm-{t}-{n}',f'Arm {t} {n}','meso','capsule','torso',[round((a[0]+b[0])/2,3),round((a[1]+b[1])/2,3),0.0],[0.3,L,0.3],'fur-black',rot=(0,0,round(math.atan2(-dx,dy),3)),role='arm')
+        add(f'hand-{t}-{n}',f'Hand {t} {n}','meso','sphere',f'arm-{t}-{n}',[b[0],b[1],0.0],[0.38,0.38,0.2],'fur-black',role='hand')
         add(f'cuff-{t}-{n}',f'Cuff scrunchie {t} {n}','micro','torus',f'arm-{t}-{n}',[round(b[0]-dx/L*0.18,3),round(b[1]-dy/L*0.18,3),0.0],[0.2,0.2,0.1],'cloth-orange' if t!='mid' else 'cloth-teal',rot=(0,0,round(math.atan2(-dx,dy),3)))
 # props
-bx,by = U(120,540); add('prop-ball','Star ball','meso','sphere','hand-low-L',[bx+0.05,by,0.05],[0.4,0.4,0.4],'cloth-purple')
-cx2,cy2 = U(1130,590); add('prop-cards','Playing cards','meso','box','hand-low-R',[cx2-0.05,cy2,0.05],[0.45,0.5,0.03],'ink-white',rot=(0,0,-0.3))
+bx,by = U(120,540); add('prop-ball','Star ball','meso','sphere','hand-low-R',[bx+0.05,by,0.05],[0.4,0.4,0.4],'cloth-purple')
+cx2,cy2 = U(1130,590); add('prop-cards','Playing cards','meso','box','hand-low-L',[cx2-0.05,cy2,0.05],[0.45,0.5,0.03],'ink-white',rot=(0,0,-0.3))
 # tails with charms
 for sx,n in ((-1,'R'),(1,'L')):
     tail_pts = [[0.0,0.0,0.0],[sx*0.5,-0.1,-0.1],[sx*0.95,0.2,-0.15],[sx*1.25,0.5,-0.1]]

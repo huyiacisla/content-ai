@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="vi" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-vietnamese-700-normal.woff2") format("woff2"); unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB; }
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-latin-ext-700-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+      @font-face { font-family: "Quicksand"; font-weight: 700; font-display: block; src: url("assets/quicksand-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #1a1030; }
+      #root { position: relative; width: 100%; height: 100%; font-family: "Quicksand", sans-serif; font-weight: 700;
+        background: linear-gradient(180deg, #2b1650 0%, #1a1030 70%, #0d0718 100%); }
+      #moon { position: absolute; right: 90px; top: 330px; width: 260px; height: 260px; border-radius: 50%; background: #f4e9c8; box-shadow: 0 0 120px 30px rgba(244,233,200,0.25); }
+      #floor { position: absolute; left: 140px; top: 1500px; width: 800px; height: 160px; border-radius: 50%; background: radial-gradient(closest-side, rgba(240,138,28,0.45), rgba(240,138,28,0)); }
+      .bat { position: absolute; z-index: 2; }
+      .pumpkin { position: absolute; top: 1660px; z-index: 3; transform-origin: 50% 100%; }
+      #stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; z-index: 4; }
+      .cap { position: absolute; left: 0; top: 120px; width: 1080px; text-align: center; font-size: 104px; line-height: 1.1; color: #f4e9c8; z-index: 6; }
+      .cap.accent { color: #f08a1c; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1080" data-height="1920">
+      <div id="moon"></div>
+      <div id="floor"></div>
+      <svg class="bat" id="bat1" style="left:60px;top:520px;width:140px" viewBox="0 0 64 28"><path fill="#0d0718" d="M32 10c2-4 4-5 6-3 2-4 8-6 14-5-3 2-4 5-3 8 4-1 8 0 11 3-5 0-9 2-11 6-3-2-7-2-10 1-2-2-4-3-7-3s-5 1-7 3c-3-3-7-3-10-1-2-4-6-6-11-6 3-3 7-4 11-3 1-3 0-6-3-8 6-1 12 1 14 5 2-2 4-1 6 3z"/></svg>
+      <svg class="bat" id="bat2" style="left:700px;top:760px;width:110px" viewBox="0 0 64 28"><path fill="#0d0718" d="M32 10c2-4 4-5 6-3 2-4 8-6 14-5-3 2-4 5-3 8 4-1 8 0 11 3-5 0-9 2-11 6-3-2-7-2-10 1-2-2-4-3-7-3s-5 1-7 3c-3-3-7-3-10-1-2-4-6-6-11-6 3-3 7-4 11-3 1-3 0-6-3-8 6-1 12 1 14 5 2-2 4-1 6 3z"/></svg>
+      <svg class="bat" id="bat3" style="left:200px;top:900px;width:90px" viewBox="0 0 64 28"><path fill="#0d0718" d="M32 10c2-4 4-5 6-3 2-4 8-6 14-5-3 2-4 5-3 8 4-1 8 0 11 3-5 0-9 2-11 6-3-2-7-2-10 1-2-2-4-3-7-3s-5 1-7 3c-3-3-7-3-10-1-2-4-6-6-11-6 3-3 7-4 11-3 1-3 0-6-3-8 6-1 12 1 14 5 2-2 4-1 6 3z"/></svg>
+      <svg class="pumpkin" id="pk1" style="left:40px;width:220px" viewBox="0 0 100 90"><rect x="46" y="2" width="9" height="16" rx="3" fill="#3a5a1c"/><ellipse cx="30" cy="52" rx="24" ry="34" fill="#f08a1c"/><ellipse cx="70" cy="52" rx="24" ry="34" fill="#f08a1c"/><ellipse cx="50" cy="52" rx="26" ry="36" fill="#f59a33"/><path d="M33 44l9-10 9 10zM55 44l9-10 9 10z" fill="#2b1206"/><path d="M30 62q20 16 40 0l-6 2-4-5-5 6-5-6-5 6-5-6-4 5z" fill="#2b1206"/></svg>
+      <svg class="pumpkin" id="pk2" style="left:830px;width:200px" viewBox="0 0 100 90"><rect x="46" y="2" width="9" height="16" rx="3" fill="#3a5a1c"/><ellipse cx="30" cy="52" rx="24" ry="34" fill="#f08a1c"/><ellipse cx="70" cy="52" rx="24" ry="34" fill="#f08a1c"/><ellipse cx="50" cy="52" rx="26" ry="36" fill="#f59a33"/><path d="M33 44l9-10 9 10zM55 44l9-10 9 10z" fill="#2b1206"/><path d="M30 62q20 16 40 0l-6 2-4-5-5 6-5-6-5 6-5-6-4 5z" fill="#2b1206"/></svg>
+      <canvas id="stage" class="clip" width="1080" height="1920" data-start="0" data-duration="16" data-track-index="0"></canvas>
+      <div class="clip cap accent" id="title" data-start="0" data-duration="2" data-track-index="2">HALLOWEEN DANCE</div>
+      <div class="clip cap" id="t-wave" data-start="2" data-duration="4" data-track-index="2">Vẫy nào!</div>
+      <div class="clip cap" id="t-bob" data-start="6" data-duration="4" data-track-index="2">Lắc đầu!</div>
+      <div class="clip cap" id="t-spin" data-start="10" data-duration="4" data-track-index="2">Quẩy lên!</div>
+      <div class="clip cap accent" id="t-end" data-start="14" data-duration="2" data-track-index="2">Happy Halloween!</div>
+      <audio id="music" src="assets/music-120bpm.mp3" data-start="0" data-duration="16" data-volume="0.5"></audio>
+    </div>
+    <script>window.__BRIEF = {"meta":{"title":"Halloween Dance — Hề Chuột 3 Đầu","lang":"vi","engine":"hyperframes + three.js","project":"hyperframes-app/halloween3d","format":{"durationSec":16,"aspect":"9:16","width":1080,"height":1920,"fps":30,"totalFrames":480},"beat":{"bpm":120,"beatSec":0.5,"beatsPerBar":4,"bars":8,"rule":"mọi động tác chốt trên nhịp; đổi động tác mỗi 2 ô nhịp (4s)"},"music":{"src":"assets/music-120bpm.mp3","volume":0.5}},"character":{"id":"jester","name":"Hề Chuột 3 Đầu","reference":"jester3d/reference.jpg","model":"jester3d/src/createObjectModel.ts (img2threejs blockout, 81 thành phần)","look":"3 đầu (vương miện / nón phù thủy nháy mắt lè lưỡi / mũ cao chán đời), 6 tay, cổ xếp nếp, quần hề kim cương, giày mũi cong, 2 đuôi có bùa","projection":{"method":"front-orthographic","note":"UV mỗi đỉnh = vị trí thế giới lúc đứng yên → pixel ảnh gốc; nền ảnh tách trong suốt (flood-fill từ góc) ⇒ viền model cắt theo viền tranh; vật liệu unlit giữ đúng nét vẽ","pixelToWorld":{"x":"(px - 627) / 300","y":"(1130 - py) / 300"},"safeYawDeg":30,"texture":"assets/jester-proj.png"},"rig":{"arms":{"shoulders":{"up":[0.357,2.333],"mid":[0.39,2.2],"low":[0.407,2.083]},"pivot":"vai (xoay quanh trục Z)"},"heads":{"pivot":"cổ (đáy đầu)","ids":["head-c","head-w","head-t"]},"legs":{"pivot":"hông; ống + giày nhấc cùng nhau"},"tails":{"pivot":"gốc đuôi"},"body":"toàn thân nhún + xoay Y"}},"style":{"palette":{"night":"#1a1030","nightTop":"#2b1650","moon":"#f4e9c8","pumpkin":"#f08a1c","purple":"#6a3fa0","teal":"#1f8a86","ink":"#f4e9c8"},"type":{"family":"Quicksand","weight":700,"maxWordsPerText":4},"background":"trời đêm tím đậm chuyển sắc, trăng tròn, 3 con dơi bay lượn, 2 bí ngô ở đáy, đèn sàn tròn","doNot":["fade mặc định","xoay quá ±30° (lộ mặt bên bị kéo dài do chiếu ảnh)"]},"camera":[{"id":"c1","startSec":0,"endSec":2,"move":"đẩy vào từ xa","yawDeg":[0,0],"dist":[16,13]},{"id":"c2","startSec":2,"endSec":10,"move":"lắc nhẹ trái-phải theo ô nhịp","yawDeg":[-8,8],"dist":[13,13]},{"id":"c3","startSec":10,"endSec":14,"move":"quỹ đạo nửa vòng nhỏ","yawDeg":[-22,22],"dist":[13,12.6]},{"id":"c4","startSec":14,"endSec":16,"move":"giật zoom vào khi tạo dáng","yawDeg":[0,0],"dist":[12.6,11.6]}],"choreography":[{"id":"intro","bars":[1,1],"startSec":0,"endSec":2,"moves":["nhún nhẹ mỗi nhịp","đuôi đung đưa"],"text":"HALLOWEEN DANCE"},{"id":"arm-wave","bars":[2,3],"startSec":2,"endSec":6,"moves":["6 tay vẫy sóng từ tầng trên xuống (lệch pha 1/4 nhịp)","thân nhún mỗi nhịp","bước chân trái-phải"],"text":"Vẫy nào!"},{"id":"head-bob","bars":[4,5],"startSec":6,"endSec":10,"moves":["3 đầu gật/nghiêng nối tiếp (canon) trái → giữa → phải","tay tầng giữa vỗ vào nhau","đuôi quẫy mạnh"],"text":"Lắc đầu!"},{"id":"spin-roof","bars":[6,7],"startSec":10,"endSec":14,"moves":["xoay thân ±25° theo ô nhịp","tay tầng trên đẩy trần (raise the roof)","nhún sâu nhịp 1 và 3"],"text":"Quẩy lên!"},{"id":"finale","bars":[8,8],"startSec":14,"endSec":16,"moves":["nhảy bật lên nhịp 1","6 tay giơ cao xòe","đứng tạo dáng"],"text":"Happy Halloween!"}],"overlays":[{"id":"title","text":"HALLOWEEN DANCE","startSec":0,"endSec":2,"pos":"top","accent":"pumpkin"},{"id":"t-wave","text":"Vẫy nào!","startSec":2,"endSec":6,"pos":"top"},{"id":"t-bob","text":"Lắc đầu!","startSec":6,"endSec":10,"pos":"top"},{"id":"t-spin","text":"Quẩy lên!","startSec":10,"endSec":14,"pos":"top"},{"id":"t-end","text":"Happy Halloween!","startSec":14,"endSec":16,"pos":"top","accent":"pumpkin"}],"limits":["chiếu ảnh 1 góc chính diện ⇒ chỉ đẹp trong ±30°; mặt bên/sau là pixel bị kéo dài","khối blockout chưa khớp hết viền tranh ⇒ vài chỗ nhỏ bị khuyết (đuôi mảnh, ngôi sao, bùa)","mặt không đổi biểu cảm (ảnh tĩnh)"]};</script>
+    <script type="module" src="assets/stage.js"></script>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#title", {scale: 0.5, y: -40}, {scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)"}, 0);
+      tl.fromTo("#t-wave", {scale: 0.5, y: -40}, {scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)"}, 2);
+      tl.fromTo("#t-bob", {scale: 0.5, y: -40}, {scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)"}, 6);
+      tl.fromTo("#t-spin", {scale: 0.5, y: -40}, {scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)"}, 10);
+      tl.fromTo("#t-end", {scale: 0.5, y: -40}, {scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)"}, 14);
+      tl.to("#t-wave", {scale: 1.12, duration: 0.08, ease: "power1.out"}, 4);
+      tl.to("#t-wave", {scale: 1, duration: 0.22, ease: "power2.out"}, 4.08);
+      tl.to("#t-bob", {scale: 1.12, duration: 0.08, ease: "power1.out"}, 8);
+      tl.to("#t-bob", {scale: 1, duration: 0.22, ease: "power2.out"}, 8.08);
+      tl.to("#t-spin", {scale: 1.12, duration: 0.08, ease: "power1.out"}, 12);
+      tl.to("#t-spin", {scale: 1, duration: 0.22, ease: "power2.out"}, 12.08);
+      tl.fromTo("#bat1", {x: -260}, {x: 1300, duration: 16, ease: "none"}, 0);
+      tl.fromTo("#bat1", {y: 0}, {y: 40, duration: 1.00, ease: "sine.inOut", repeat: 16, yoyo: true}, 0);
+      tl.fromTo("#bat2", {x: 260}, {x: -1300, duration: 16, ease: "none"}, 0);
+      tl.fromTo("#bat2", {y: 0}, {y: 55, duration: 1.25, ease: "sine.inOut", repeat: 12, yoyo: true}, 0);
+      tl.fromTo("#bat3", {x: -260}, {x: 1300, duration: 16, ease: "none"}, 0);
+      tl.fromTo("#bat3", {y: 0}, {y: 70, duration: 1.50, ease: "sine.inOut", repeat: 10, yoyo: true}, 0);
+      tl.fromTo("#moon", {scale: 0.9}, {scale: 1, duration: 16, ease: "none"}, 0);
+      tl.set(".pumpkin", {scaleY: 1}, 0);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 0);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 0.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 1);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 1.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 2);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 2.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 3);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 3.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 4);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 4.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 5);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 5.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 6);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 6.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 7);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 7.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 8);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 8.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 9);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 9.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 10);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 10.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 11);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 11.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 12);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 12.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 13);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 13.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 14);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 14.10);
+      tl.to(".pumpkin", {scaleY: 0.9, duration: 0.1, ease: "power1.in"}, 15);
+      tl.to(".pumpkin", {scaleY: 1, duration: 0.4, ease: "back.out(2.2)"}, 15.10);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
